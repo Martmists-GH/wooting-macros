@@ -41,11 +41,14 @@ pub mod plugin;
 ///
 /// ! **UNIMPLEMENTED** - Only the `Single` macro type is implemented for now. Feel free to contribute ideas.
 pub enum MacroType {
-    Single,
     // Single macro fire
-    Toggle,
+    Single,
     // press to start, press to finish cycle and terminate
-    OnHold, // while held Execute macro (repeats)
+    Toggle,
+    // while held Execute macro (repeats)
+    OnHold,
+    // X amount of times repeat
+    RepeatX,
 }
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
@@ -103,7 +106,7 @@ pub struct Macro {
     pub sequence: Vec<ActionEventType>,
     pub macro_type: MacroType,
     pub trigger: TriggerEventType,
-    pub active: bool,
+    pub enabled: bool,
 }
 
 impl Macro {
@@ -190,7 +193,7 @@ impl Default for MacroData {
                 name: "Collection 1".to_string(),
                 icon: ":smile:".to_string(),
                 macros: vec![],
-                active: true,
+                enabled: true,
             }],
         }
     }
@@ -202,9 +205,9 @@ impl MacroData {
         let mut output_hashmap = MacroTriggerLookup::new();
 
         for collections in &self.data {
-            if collections.active {
+            if collections.enabled {
                 for macros in &collections.macros {
-                    if macros.active {
+                    if macros.enabled {
                         match &macros.trigger {
                             TriggerEventType::KeyPressEvent { data, .. } => {
                                 //TODO: optimize using references
@@ -257,7 +260,7 @@ pub struct Collection {
     pub name: String,
     pub icon: String,
     pub macros: Vec<Macro>,
-    pub active: bool,
+    pub enabled: bool,
 }
 
 /// Executes a given macro (according to its type).
@@ -283,6 +286,9 @@ async fn execute_macro(macros: Macro, channel: UnboundedSender<rdev::EventType>)
         MacroType::OnHold => {
             //Postponed
             //execute_macro_onhold(&macros).await;
+        }
+        MacroType::RepeatX => {
+            //Postponed
         }
     }
 }
@@ -335,9 +341,6 @@ fn check_macro_execution_efficiently(
                             let channel_clone_execute = channel_sender.clone();
                             let macro_clone_execute = macros.clone();
 
-                            // We don't need this here as there can't be a single key that's a modifier
-                            // plugin::util::lift_keys(data, &channel_clone_execute);
-
                             task::spawn(async move {
                                 execute_macro(macro_clone_execute, channel_clone_execute).await;
                             });
@@ -357,6 +360,7 @@ fn check_macro_execution_efficiently(
                             let macro_clone_execute = macros.clone();
 
                             // This releases any trigger keys that have been held to make macros more reliable when used with modifier hotkeys.
+                            // Only required for multi-key triggers.
                             plugin::util::lift_keys(data, &channel_clone_execute)
                                 .unwrap_or_else(|err| error!("Error lifting keys: {}", err));
 
@@ -576,7 +580,7 @@ impl MacroBackend {
                 }
             })
         });
-        Err(anyhow::Error::msg("Error in grabbing thread!"))
+        Ok(())
     }
 }
 
