@@ -27,8 +27,8 @@ interface Props {
   isEditing: boolean
 }
 
-export default function Header({ isEditing }: Props) {
-  const { changeSelectedMacroIndex } = useApplicationContext()
+export default function Header({isEditing}: Props) {
+  const {changeSelectedMacroIndex} = useApplicationContext()
   const {
     macro,
     sequence,
@@ -209,7 +209,7 @@ export default function Header({ isEditing }: Props) {
         isOpen={isUnsavedChangesModalOpen}
         onClose={onUnsavedChangesModalClose}
       />
-      <TriggerModal isOpen={isTriggerModalOpen} onClose={onTriggerModalClose} />
+      <TriggerModal isOpen={isTriggerModalOpen} onClose={onTriggerModalClose}/>
     </>
   )
 }
