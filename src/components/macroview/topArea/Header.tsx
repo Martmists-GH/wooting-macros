@@ -27,8 +27,8 @@ interface Props {
   isEditing: boolean
 }
 
-export default function Header({isEditing}: Props) {
-  const {changeSelectedMacroIndex} = useApplicationContext()
+export default function Header({ isEditing }: Props) {
+  const { changeSelectedMacroIndex } = useApplicationContext()
   const {
     macro,
     sequence,
@@ -142,6 +142,8 @@ export default function Header({isEditing}: Props) {
         zIndex={1}
         bg={useMainBgColour()}
         w="full"
+        // h={{ base: 'full', md: '100px', xl: '120px' }}
+        h="full"
         py={2}
         px={{ base: 2, md: 4, xl: 6 }}
         spacing={4}
@@ -209,7 +211,7 @@ export default function Header({isEditing}: Props) {
         isOpen={isUnsavedChangesModalOpen}
         onClose={onUnsavedChangesModalClose}
       />
-      <TriggerModal isOpen={isTriggerModalOpen} onClose={onTriggerModalClose}/>
+      <TriggerModal isOpen={isTriggerModalOpen} onClose={onTriggerModalClose} />
     </>
   )
 }
