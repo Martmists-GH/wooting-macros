@@ -96,7 +96,6 @@ export default function MacroTypeArea() {
           {macro.macro_type}
         </Text>
         <HStack>
-
           {(Object.keys(MacroType) as Array<keyof typeof MacroType>)
             .filter(checkIfStringIsNonNumeric)
             .map((value: string, index: number) => (
@@ -129,13 +128,12 @@ export default function MacroTypeArea() {
           <Box
             position="absolute"
             // left="50%"
-            transform="translate(40%, -140%)"
+            transform="translate(0%, -125%)"
             fontSize="md"
             zIndex="1"
             bgColor={secondBg}
-
           >
-            {macro.macro_type}
+            {'Macro Type'}
           </Box>
           <Box
             position="absolute"
