@@ -10,7 +10,7 @@ import {
   useState
 } from 'react'
 import { ApplicationConfig, SettingsState } from '../types'
-import { updateSettings } from '../constants/utils'
+import { DefaultDelayDelay, DefaultMacroDelay, updateSettings } from '../constants/utils'
 import { error } from 'tauri-plugin-log'
 import { DefaultDelayDelay, DefaultMacroDelay } from '../constants'
 
