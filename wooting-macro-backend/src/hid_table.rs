@@ -1,11 +1,12 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-use crate::plugin::mouse::MouseButton;
 use lazy_static::lazy_static;
 
 use rdev;
 use rdev::Key;
+
+use crate::plugin::mouse::MouseButton;
 
 lazy_static! {
 #[derive(Debug, PartialEq, Hash, std::cmp::Eq)]
@@ -163,6 +164,11 @@ pub static ref HID_TO_RDEV: HashMap<u32, Key> = {
         scancode.insert(0x7f, Key::VolumeMute); //VOLUME_MUTE
         scancode.insert(0x81, Key::VolumeDown); //VOLUME_DOWN
         scancode.insert(0x80, Key::VolumeUp); //VOLUME_UP
+
+        scancode.insert(0xB0, Key::NextTrack); //NEXT_TRACK
+        scancode.insert(0xB1, Key::PrevTrack); //PREV_TRACK
+        scancode.insert(0xB2, Key::StopTrack); //STOP_TRACK
+        scancode.insert(0xB3, Key::PlayPauseTrack); //PLAY_PAUSE_TRACK
 
         scancode.insert(0x46, Key::PrintScreen); //PRINT_SCREEN
         scancode.insert(0x47, Key::ScrollLock); //SCROLL_LOCK
@@ -338,6 +344,11 @@ pub static ref RDEV_TO_HID: HashMap<Key, u32> = {
         scancode.insert(Key::VolumeDown, 0x81); //VOLUME_DOWN
         scancode.insert(Key::VolumeUp, 0x80); //VOLUME_UP
 
+        scancode.insert(Key::NextTrack, 0xB0); //NEXT_TRACK
+        scancode.insert(Key::PrevTrack, 0xB1); //PREV_TRACK
+        scancode.insert(Key::StopTrack, 0xB2); //STOP_TRACK
+        scancode.insert(Key::PlayPauseTrack, 0xB3); //PLAY_PAUSE_TRACK
+
         scancode.insert(Key::PrintScreen, 0x46); //PRINT_SCREEN
         scancode.insert(Key::ScrollLock, 0x47); //SCROLL_LOCK
 
@@ -391,11 +402,6 @@ pub static ref RDEV_TO_HID: HashMap<Key, u32> = {
         // scancode.insert(0x7c, Key::Key); //COPY
         // scancode.insert(0x7d, Key::Key); //PASTE
         // scancode.insert(0x7e, Key::Key); //FIND
-        // scancode.insert(0x7f, Key::Key); //VOLUME_MUTE
-        //
-        // scancode.insert(0x80, Key::Key); //VOLUME_UP
-        // scancode.insert(0x81, Key::Key); //VOLUME_DOWN
-        // scancode.insert(0x85, Key::Key); //NUMPAD_COMMA
         //
         // scancode.insert(0x87, Key::Key); //INTL_RO
         // scancode.insert(0x88, Key::Key); //KANA_MODE
