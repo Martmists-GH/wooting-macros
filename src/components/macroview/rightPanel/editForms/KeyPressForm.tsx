@@ -25,6 +25,7 @@ import { KeyPressEventAction } from '../../../../types'
 import { BoxText } from '../EditArea'
 import { HIDLookup } from '../../../../constants/HIDmap'
 import { DefaultMacroDelay } from "../../../../constants";
+import { useSettingsContext } from "../../../../contexts/settingsContext";
 
 interface Props {
   selectedElementId: number
@@ -37,7 +38,7 @@ export default function KeyPressForm({
 }: Props) {
   const config = useSettingsContext()
   const [keypressDuration, setKeypressDuration] = useState(
-    String(config.config.DefaultElementDurationValue)
+    config.config.DefaultElementDurationValue
   )
   const [keypressType, setKeypressType] = useState<KeyType>()
   const { updateElement } = useMacroContext()

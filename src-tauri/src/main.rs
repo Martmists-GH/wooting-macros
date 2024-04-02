@@ -17,13 +17,11 @@ use tauri::{
 };
 use tauri_plugin_log::fern::colors::{Color, ColoredLevelConfig};
 
-
-use anyhow::Result;
 use wooting_macro_backend::config;
 use wooting_macro_backend::config::{ApplicationConfig, ConfigFile, LogDirPath};
-use wooting_macro_backend::MacroBackend;
 use wooting_macro_backend::macros::events::triggers::MacroIndividualCommand;
 use wooting_macro_backend::macros::macro_data::MacroData;
+use wooting_macro_backend::MacroBackend;
 // This is the debug envvar you may wish to set if you want advanced access to debug info from Wootomation.
 const DEBUG_ENVVAR: &str = "MACRO_LOG_LEVEL";
 
@@ -93,10 +91,13 @@ async fn control_grabbing(
 async fn execute_macro(
     mut state: tauri::State<'_, MacroBackend>,
     macro_name: String,
-    action_type: MacroIndividualCommand
+    action_type: MacroIndividualCommand,
 ) -> Result<(), String> {
-    state.execute_macro_by_name(macro_name, action_type).await.map_err(|err| err.to_string())
-
+    state
+        .execute_macro_by_name(macro_name, action_type)
+        .await
+        .map_err(|err| err.to_string())
+}
 /// Enables or disables the automatic startup of Wootomation at system start.
 fn init_autostart(app_name: &str, set_autolaunch: bool) -> Result<(), Error> {
     let current_exe = std::env::current_exe().context("current EXE not found")?;
@@ -145,10 +146,7 @@ async fn main() -> Result<(), Error> {
     #[cfg(any(target_os = "windows", target_os = "linux"))]
     // The backend is run only on Windows and Linux, on macOS it won't work.
     info!("Running the macro backend");
-    if let Err(e) = backend.init().await {
-        error!("Initialization error: {}", e);
-    };
-
+    backend.init().await;
     // Read the options from the config.
     let set_autolaunch: bool = backend.config.read().await.auto_start;
     let set_launch_minimized: bool = backend.config.read().await.minimize_at_launch;
@@ -164,139 +162,139 @@ async fn main() -> Result<(), Error> {
 
     // Initialize the main application
     tauri::Builder::default()
-        // State management is initialized
-        .manage(backend)
-        // This is where commands shared with frontend are passed
-        .invoke_handler(tauri::generate_handler![
+            // State management is initialized
+            .manage(backend)
+            // This is where commands shared with frontend are passed
+            .invoke_handler(tauri::generate_handler![
             get_macros,
             set_macros,
             get_config,
             set_config,
             control_grabbing,
-            execute_macro
+            execute_macro,
             is_debug
         ])
-        .setup(move |app| {
-            let app_name = &app.package_info().name;
-            init_autostart(&app_name, set_autolaunch).unwrap_or_else(|err| {
-                error!("error changing the autostart options: {}", err.to_string())
-            });
+            .setup(move |app| {
+                let app_name = &app.package_info().name;
+                init_autostart(&app_name, set_autolaunch).unwrap_or_else(|err| {
+                    error!("error changing the autostart options: {}", err.to_string())
+                });
 
-            Ok(())
-        })
-        .system_tray(system_tray)
-        .on_system_tray_event(|app, event| match event {
-            SystemTrayEvent::MenuItemClick { id, .. } => {
-                // get a handle to the clicked menu item
-                // note that `tray_handle` can be called anywhere,
-                // just get a `AppHandle` instance with `app.handle()` on the setup hook
-                // and move it to another function or thread
-                let item_handle = app.tray_handle().get_item(&id);
-                match id.as_str() {
-                    "hide_show" => {
-                        let window = app.get_window("main").expect("Couldn't fetch window");
+                Ok(())
+            })
+            .system_tray(system_tray)
+            .on_system_tray_event(|app, event| match event {
+                SystemTrayEvent::MenuItemClick { id, .. } => {
+                    // get a handle to the clicked menu item
+                    // note that `tray_handle` can be called anywhere,
+                    // just get a `AppHandle` instance with `app.handle()` on the setup hook
+                    // and move it to another function or thread
+                    let item_handle = app.tray_handle().get_item(&id);
+                    match id.as_str() {
+                        "hide_show" => {
+                            let window = app.get_window("main").expect("Couldn't fetch window");
 
-                        // you can also `set_selected`, `set_enabled` and `set_native_image` (macOS only).
-                        match window.is_visible().expect("Couldn't get window visibility") {
-                            true => {
-                                window.hide().expect("Couldn't hide window");
-                                item_handle
-                                    .set_title("Show")
-                                    .expect("Couldn't change system tray item to show")
+                            // you can also `set_selected`, `set_enabled` and `set_native_image` (macOS only).
+                            match window.is_visible().expect("Couldn't get window visibility") {
+                                true => {
+                                    window.hide().expect("Couldn't hide window");
+                                    item_handle
+                                        .set_title("Show")
+                                        .expect("Couldn't change system tray item to show")
+                                }
+                                false => {
+                                    window.show().expect("Couldn't show window");
+                                    item_handle
+                                        .set_title("Hide")
+                                        .expect("Couldn't change system tray item to hide")
+                                }
                             }
-                            false => {
-                                window.show().expect("Couldn't show window");
-                                item_handle
-                                    .set_title("Hide")
-                                    .expect("Couldn't change system tray item to hide")
-                            }
+
+                            window.clone().on_window_event(move |window_event| {
+                                if let WindowEvent::CloseRequested { .. } = window_event {
+                                    window.hide().expect("Couldn't hide window");
+                                    item_handle
+                                        .set_title("Show")
+                                        .expect("Couldn't change system tray item to show");
+                                }
+                            })
+                        }
+                        "quit" => {
+                            app.exit(0);
                         }
 
-                        window.clone().on_window_event(move |window_event| {
-                            if let WindowEvent::CloseRequested { .. } = window_event {
-                                window.hide().expect("Couldn't hide window");
-                                item_handle
-                                    .set_title("Show")
-                                    .expect("Couldn't change system tray item to show");
-                            }
-                        })
+                        _ => {}
                     }
-                    "quit" => {
-                        app.exit(0);
-                    }
-
-                    _ => {}
                 }
-            }
-            SystemTrayEvent::LeftClick { .. } => {
+                SystemTrayEvent::LeftClick { .. } => {
+                    let window = app.get_window("main").expect("Couldn't fetch window");
+                    window.show().expect("Couldn't show window");
+                    app.tray_handle()
+                        .get_item("hide_show")
+                        .set_title("Hide")
+                        .expect("Couldn't hide window");
+                }
+                _ => {}
+            })
+            .on_page_load(move |window, _| {
+                if set_launch_minimized {
+                    window.hide().expect("Couldn't hide window");
+                }
+            })
+            .on_window_event(move |event| {
+                if let WindowEvent::CloseRequested { api, .. } = event.event() {
+                    if ApplicationConfig::read_data()
+                        .expect("error reading config data, can't determine if app is to be terminated or hidden")
+                        .minimize_to_tray
+                    {
+                        event.window().hide().expect("Couldn't hide window");
+                        api.prevent_close();
+                    }
+                }
+            })
+            .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+                info!("{}, {argv:?}, {cwd}", app.package_info().name);
+
                 let window = app.get_window("main").expect("Couldn't fetch window");
+
                 window.show().expect("Couldn't show window");
-                app.tray_handle()
-                    .get_item("hide_show")
-                    .set_title("Hide")
-                    .expect("Couldn't hide window");
-            }
-            _ => {}
-        })
-        .on_page_load(move |window, _| {
-            if set_launch_minimized {
-                window.hide().expect("Couldn't hide window");
-            }
-        })
-        .on_window_event(move |event| {
-            if let WindowEvent::CloseRequested { api, .. } = event.event() {
-                if ApplicationConfig::read_data()
-                    .expect("error reading config data, can't determine if app is to be terminated or hidden")
-                    .minimize_to_tray
-                {
-                    event.window().hide().expect("Couldn't hide window");
-                    api.prevent_close();
-                }
-            }
-        })
-        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
-            info!("{}, {argv:?}, {cwd}", app.package_info().name);
+                window.set_focus().expect("Couldn't focus window");
 
-            let window = app.get_window("main").expect("Couldn't fetch window");
-
-            window.show().expect("Couldn't show window");
-            window.set_focus().expect("Couldn't focus window");
-
-            app.emit_all("single-instance", ())
-                .expect("Couldn't re-focus opened instance.");
-        }))
-        .plugin(
-            tauri_plugin_log::Builder::default()
-                .level(log_level)
-                .format(|out, message, record| {
-                    out.finish(format_args!(
-                        "{:?} [{}] [{}] | {}",
-                        time::SystemTime::now(),
-                        record.target(),
-                        record.level(),
-                        message
-                    ))
-                })
-                .with_colors(
-                    ColoredLevelConfig::new()
-                        .error(Color::Red)
-                        .warn(Color::Yellow)
-                        .info(Color::Green)
-                        .debug(Color::Magenta)
-                        .trace(Color::White),
-                )
-                .max_file_size(Byte::from_f64_with_unit(16_f64, Unit::KiB).unwrap().into())
-                .targets([
-                    tauri_plugin_log::LogTarget::Folder(
-                        LogDirPath::file_name().expect("error getting log folder name"),
-                    ),
-                    tauri_plugin_log::LogTarget::Stdout,
-                    tauri_plugin_log::LogTarget::Webview,
-                ])
-                .build(),
-        )
-        .run(tauri::generate_context!())
-        .context("error while running tauri application")?;
+                app.emit_all("single-instance", ())
+                    .expect("Couldn't re-focus opened instance.");
+            }))
+            .plugin(
+                tauri_plugin_log::Builder::default()
+                    .level(log_level)
+                    .format(|out, message, record| {
+                        out.finish(format_args!(
+                            "{:?} [{}] [{}] | {}",
+                            time::SystemTime::now(),
+                            record.target(),
+                            record.level(),
+                            message
+                        ))
+                    })
+                    .with_colors(
+                        ColoredLevelConfig::new()
+                            .error(Color::Red)
+                            .warn(Color::Yellow)
+                            .info(Color::Green)
+                            .debug(Color::Magenta)
+                            .trace(Color::White),
+                    )
+                    .max_file_size(Byte::from_f64_with_unit(16_f64, Unit::KiB).unwrap().into())
+                    .targets([
+                        tauri_plugin_log::LogTarget::Folder(
+                            LogDirPath::file_name().expect("error getting log folder name"),
+                        ),
+                        tauri_plugin_log::LogTarget::Stdout,
+                        tauri_plugin_log::LogTarget::Webview,
+                    ])
+                    .build(),
+            )
+            .run(tauri::generate_context!())
+            .context("error while running tauri application")?;
 
     Ok(())
 }

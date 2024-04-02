@@ -12,7 +12,6 @@ import { HIDLookup } from './HIDmap'
 import { mouseEnumLookup } from './MouseMap'
 import { sysEventLookup } from './SystemEventMap'
 import { MacroDataInterface } from "../components/macroview/topArea/MacroStateButtons";
-import { scrollbarRadiusStandard } from "../theme/config";
 
 export const updateBackendConfig = (
   collections: Collection[]
@@ -35,6 +34,7 @@ export const executeMacro = ({ macro_data }: MacroDataInterface, action: MacroIn
     macroName: macro_data.name,
     actionType: action,
   })
+}
 export const isDebug = (): Promise<boolean> => {
   return invoke<boolean>('is_debug', {})
 }
@@ -174,5 +174,6 @@ export const scrollbarsStylesDark = {
     borderRadius: 'lg'
   }
 }
+
 
 
