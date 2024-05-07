@@ -512,7 +512,7 @@ export class Hid {
       category: HIDCategory.Alphanumeric,
       displayString: ',',
       webKeyId: 'Comma',
-      whichID: 77
+      whichID: 188
     }
   }
 
@@ -522,7 +522,7 @@ export class Hid {
       category: HIDCategory.Alphanumeric,
       displayString: '.',
       webKeyId: 'Period',
-      whichID: 188
+      whichID: 190
     }
   }
 
