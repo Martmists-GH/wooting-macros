@@ -22,7 +22,6 @@ import React, { ChangeEvent, useState } from 'react'
 import useScrollbarStyles from '../../../hooks/useScrollbarStyles'
 import MacroStateControls, { MacroDataInterface } from './MacroStateButtons'
 import { Macro } from '../../../types'
-import { borderRadiusStandard } from '../../../theme/config'
 
 interface DrawerProps {
   isOpen: boolean
@@ -91,7 +90,6 @@ function MacroTestResponseArea() {
             py={1}
             px={3}
             borderColor={kebabColour}
-            rounded={borderRadiusStandard}
           >
             <Text
               fontSize={['sm', 'md', 'md']}
