@@ -13,7 +13,6 @@ export enum MacroType {
 }
 
 
-
 /** Currently unused */
 export const MacroTypeDefinitions: string[] = [
   'SINGLE:\nThe macro will play once after the trigger key(s) is pressed.',

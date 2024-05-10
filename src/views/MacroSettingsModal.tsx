@@ -32,7 +32,22 @@ interface SettingsTabDefinition {
 export const SettingTabs: SettingsTabDefinition[] = [
   {
     title: 'Macro Defaults',
-    component: () => <DefaultMacroSettings />
+    component: () => (
+      <DefaultMacroSettings
+        name={''}
+        icon={''}
+        enabled={false}
+        macro_type={''}
+        trigger={{
+          type: 'KeyPressEvent',
+          data: [],
+          allow_while_other_keys: false
+        }}
+        sequence={[]}
+        repeat_amount={0}
+        record_delay_sequence={true}
+      />
+    )
   },
   {
     title: 'Notifications',

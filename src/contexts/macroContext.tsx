@@ -28,6 +28,7 @@ const macroDefault: Macro = {
   trigger: {type: 'KeyPressEvent', data: [], allow_while_other_keys: false},
   sequence: [],
   repeat_amount: 1,
+  record_delay_sequence: undefined
 }
 
 function MacroProvider({children}: MacroProviderProps) {
@@ -150,6 +151,12 @@ function MacroProvider({children}: MacroProviderProps) {
   const updateMacroName = useCallback(
     (newName: string) => {
       setMacro({...macro, name: newName})
+    },
+    [macro, setMacro]
+  )
+  const updateMacroRecordSeqDelay= useCallback(
+    (newValue: undefined | boolean) => {
+      setMacro({...macro, record_delay_sequence: newValue})
     },
     [macro, setMacro]
   )
@@ -349,6 +356,7 @@ function MacroProvider({children}: MacroProviderProps) {
       updateMacroIcon,
       updateMacroType,
       updateMacroRepeatAmount,
+      updateMacroRecordSeqDelay,
       updateTrigger,
       updateAllowWhileOtherKeys,
       onElementAdd,
@@ -371,6 +379,7 @@ function MacroProvider({children}: MacroProviderProps) {
       selectedElementId,
       isUpdatingMacro,
       canSaveMacro,
+      updateMacroRecordSeqDelay,
       willCauseTriggerLooping,
       updateMacroName,
       updateMacroIcon,

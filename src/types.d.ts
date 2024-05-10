@@ -39,6 +39,7 @@ export type MacroState = {
   updateMacroIcon: (newIcon: string) => void
   updateMacroType: (newType: MacroType) => void
   updateMacroRepeatAmount: (newAmount: number) => void
+  updateMacroRecordSeqDelay: (newValue: undefined | boolean) => void
   updateTrigger: (newElement: TriggerEventType) => void
   updateAllowWhileOtherKeys: (value: boolean) => void
   onElementAdd: (newElement: ActionEventType) => void
@@ -118,6 +119,7 @@ export interface Macro {
   trigger: TriggerEventType
   sequence: ActionEventType[]
   repeat_amount: number
+  record_delay_sequence: undefined | boolean
 }
 
 export interface Collection {
