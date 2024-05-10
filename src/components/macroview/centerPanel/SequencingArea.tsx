@@ -101,6 +101,8 @@ export default function SequencingArea({ onOpenMacroSettingsModal }: Props) {
       } else {
         if (checkIfKeypress(item)) {
           onElementsAdd([
+            //TODO: This is new toggle
+
             {
               type: 'DelayEventAction',
               data: timeDiff
@@ -112,6 +114,7 @@ export default function SequencingArea({ onOpenMacroSettingsModal }: Props) {
           ])
         } else {
           onElementsAdd([
+            //TODO: This is new toggle
             {
               type: 'DelayEventAction',
               data: timeDiff
