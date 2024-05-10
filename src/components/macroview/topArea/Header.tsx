@@ -9,7 +9,7 @@ import {
   Tooltip,
   VStack,
   useColorModeValue,
-  useDisclosure,
+  useDisclosure
 } from '@chakra-ui/react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApplicationContext } from '../../../contexts/applicationContext'
@@ -22,6 +22,7 @@ import UnsavedChangesModal from '../UnsavedChangesModal'
 import useMainBgColour from '../../../hooks/useMainBgColour'
 import MacroTypeArea from './MacroTypeArea'
 import MacroStateControls from './MacroStateButtons'
+import MacroTestingAreaButton from './MacroTestingArea'
 
 interface Props {
   isEditing: boolean
@@ -203,6 +204,7 @@ export default function Header({ isEditing }: Props) {
           <MacroTypeArea />
           <TriggerArea onOpen={onTriggerModalOpen} />
           <MacroStateControls macro_data={macro} />
+          <MacroTestingAreaButton macro_data={macro} />
         </HStack>
       </VStack>
       <UnsavedChangesModal
