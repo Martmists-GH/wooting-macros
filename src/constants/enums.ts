@@ -13,6 +13,13 @@ export enum MacroType {
 }
 
 
+export const MacroSettingOption: string[]=[
+  'Ignored',
+  'OverrideEnable',
+  'OverrideDisable',
+]
+
+
 /** Currently unused */
 export const MacroTypeDefinitions: string[] = [
   'SINGLE:\nThe macro will play once after the trigger key(s) is pressed.',

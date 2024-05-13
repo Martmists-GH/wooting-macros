@@ -4,15 +4,16 @@ interface RadioCardProps {
   value: string
   selectedValue: string
   onChange: (value: string) => void
+  radio:any
 }
 
 export default function MultipleSetting({
   value,
   selectedValue,
-  onChange
+  onChange,
+  radio
 }: RadioCardProps) {
-  const isChecked = value === selectedValue
-  const { getInputProps, getRadioProps } = useRadio({ value, isChecked })
+  const { getInputProps, getRadioProps } = useRadio({ ...radio})
 
   const input = getInputProps()
   const checkbox = getRadioProps()
