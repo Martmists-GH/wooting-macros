@@ -13,11 +13,17 @@ export enum MacroType {
 }
 
 
-export const MacroSettingOption: string[]=[
-  'Ignored',
-  'OverrideEnable',
-  'OverrideDisable',
+export const MacroSettingOptionDefiniton: string[]=[
+  'Ignore',
+  'On',
+  'Off',
 ]
+
+export enum MacroSettingOption {
+  IGNORED,
+  OVERRIDE_ENABLED,
+  OVERRIDE_DISABLED
+}
 
 
 /** Currently unused */

@@ -15,7 +15,7 @@ export default function Macroview({
   isEditing,
   onOpenMacroSettingsModal
 }: Props) {
-  const { changeIsUpdatingMacro } = useMacroContext()
+  const { changeIsUpdatingMacro} = useMacroContext()
   const [searchValue, changeSearchValue] = useState('')
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function Macroview({
           changeSearchValue={changeSearchValue}
           searchValue={searchValue}
         />
-        <SequencingArea onOpenMacroSettingsModal={onOpenMacroSettingsModal} />
+        <SequencingArea  onOpenMacroSettingsModal={onOpenMacroSettingsModal} />
         <EditArea />
       </HStack>
     </VStack>

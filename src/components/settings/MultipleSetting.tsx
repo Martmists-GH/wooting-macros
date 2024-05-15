@@ -1,10 +1,11 @@
-import { Box, HStack, Text, useRadio, VStack } from '@chakra-ui/react'
+import { Box, HStack, useRadio } from '@chakra-ui/react'
+import { MacroSettingOptionDefiniton } from '../../constants/enums'
 
 interface RadioCardProps {
   value: string
-  selectedValue: string
-  onChange: (value: string) => void
-  radio:any
+  selectedValue: number
+  onChange: (value: number) => void
+  radio: any
 }
 
 export default function MultipleSetting({
@@ -13,7 +14,15 @@ export default function MultipleSetting({
   onChange,
   radio
 }: RadioCardProps) {
-  const { getInputProps, getRadioProps } = useRadio({ ...radio})
+  console.log(
+    'SELECTED:' + MacroSettingOptionDefiniton[selectedValue],
+    'VALUE: ' + value
+  )
+  const { getInputProps, getRadioProps } = useRadio({
+    ...radio,
+    isChecked: value === MacroSettingOptionDefiniton[selectedValue],
+    onChange: () => onChange(MacroSettingOptionDefiniton.indexOf(value))
+  })
 
   const input = getInputProps()
   const checkbox = getRadioProps()
@@ -36,9 +45,10 @@ export default function MultipleSetting({
           _focus={{
             boxShadow: 'outline'
           }}
-          px={5}
-          py={3}
-          onClick={() => onChange(value)}
+          px={2}
+          py={1}
+          // onClick={() => onChange(value)}
+
         >
           {value}
         </Box>

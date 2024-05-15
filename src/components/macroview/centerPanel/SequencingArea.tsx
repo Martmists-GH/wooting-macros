@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { DeleteIcon, SettingsIcon, TimeIcon } from '@chakra-ui/icons'
 import { useCallback } from 'react'
-import { Keypress, MousePressAction } from '../../../types'
+import { Keypress, Macro, MousePressAction } from '../../../types'
 import { useMacroContext } from '../../../contexts/macroContext'
 import useRecordingSequence from '../../../hooks/useRecordingSequence'
 import { useSettingsContext } from '../../../contexts/settingsContext'
@@ -36,7 +36,7 @@ export default function SequencingArea({ onOpenMacroSettingsModal }: Props) {
     willCauseTriggerLooping,
     onElementAdd,
     onElementsAdd,
-    updateElement
+    updateElement,
   } = useMacroContext()
   const { config } = useSettingsContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
