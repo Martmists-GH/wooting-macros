@@ -7,7 +7,12 @@ import {
   useMemo,
   useState
 } from 'react'
-import { MacroType, ViewState } from '../constants/enums'
+import {
+  MacroSettingOption,
+  MacroSettingOptionDefiniton,
+  MacroType,
+  ViewState
+} from '../constants/enums'
 import { checkIfElementIsEditable } from '../constants/utils'
 import {
   ActionEventType,
@@ -165,11 +170,39 @@ function MacroProvider({ children }: MacroProviderProps) {
     [macro, setMacro]
   )
   const updateMacroRecordSeqDelay = useCallback(
-    (newValue: undefined | boolean) => {
-      setMacro({ ...macro, record_delay_sequence: newValue })
+    (newValue: number) => {
+      let value: undefined | boolean = undefined
+
+      switch (newValue) {
+        case 2:
+          value = true
+          break
+        case 1:
+          value = false
+          break
+        default:
+          break
+      }
+
+      setMacro({ ...macro, record_delay_sequence: value })
     },
     [macro, setMacro]
   )
+  const getMacroRecordSeqDelayIndex = useCallback(() => {
+    let value: number = 0
+    switch (macro.record_delay_sequence) {
+      case true:
+        value = 2
+        break
+      case false:
+        value = 1
+        break
+      default:
+        break
+    }
+
+    return value
+  }, [macro])
   const updateMacroIcon = useCallback(
     (newIcon: string) => {
       setMacro({ ...macro, icon: newIcon })
@@ -367,6 +400,7 @@ function MacroProvider({ children }: MacroProviderProps) {
       updateMacroType,
       updateMacroRepeatAmount,
       updateMacroRecordSeqDelay,
+      getMacroRecordSeqDelayIndex,
       updateTrigger,
       updateAllowWhileOtherKeys,
       onElementAdd,
@@ -390,6 +424,7 @@ function MacroProvider({ children }: MacroProviderProps) {
       isUpdatingMacro,
       canSaveMacro,
       updateMacroRecordSeqDelay,
+      getMacroRecordSeqDelayIndex,
       willCauseTriggerLooping,
       updateMacroName,
       updateMacroIcon,

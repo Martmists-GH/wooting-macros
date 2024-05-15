@@ -99,10 +99,12 @@ function App() {
         </MacroProvider>
       )}
       <SettingsModal isOpen={isOpenSettings} onClose={onCloseSettings} />
+      <MacroProvider>
       <MacroSettingsModal
         isOpen={isOpenMacroSettings}
         onClose={onCloseMacroSettings}
       />
+      </MacroProvider>
     </Flex>
   )
 }

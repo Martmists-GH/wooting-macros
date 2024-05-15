@@ -1,25 +1,29 @@
 import { Divider, HStack, Text, useRadioGroup, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { Macro } from '../../types'
+import React from 'react'
 import MultipleSetting from '../settings/MultipleSetting'
-import { MacroSettingOption } from "../../constants/enums";
-// import { MacroSettingEnum } from "../../constants/enums";
+import { MacroSettingOptionDefiniton } from "../../constants/enums";
+import { useMacroContext } from "../../contexts/macroContext";
 
-export default function DefaultMacroSettings(macro: Macro) {
-  const options = MacroSettingOption
-  const selected = Number(macro.record_delay_sequence ?? -1) + 1
-  const [selectedValue, setSelectedValue] = useState(options[selected])
+export default function DefaultMacroSettings() {
+
+  const {
+    macro,
+    updateMacroRecordSeqDelay,
+    getMacroRecordSeqDelayIndex,
+  } = useMacroContext()
+
+  const options = MacroSettingOptionDefiniton
+
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'framework',
     defaultValue: 'react',
-    onChange: setSelectedValue
+    onChange: updateMacroRecordSeqDelay
   })
 
   const group = getRootProps()
 
-  console.log(selectedValue)
-
+  console.log("Value in macro: " +macro.record_delay_sequence)
   return (
     <VStack w="full" spacing="4">
       <VStack w="full">
@@ -32,14 +36,15 @@ export default function DefaultMacroSettings(macro: Macro) {
           <Text as="b">Record delay when recording sequence</Text>
           <HStack {...group}>
             TODO: Move options.map inside the multiple settings and only give options array,
-            {options.map((value) => {
+            {options.map((value, index) => {
               const radio = getRadioProps({value})
+              const index_macro = getMacroRecordSeqDelayIndex()
               return (
                 <MultipleSetting
                   key={value}
-                  value={value}
-                  selectedValue={selectedValue}
-                  onChange={setSelectedValue}
+                  value={MacroSettingOptionDefiniton[index]}
+                  selectedValue={index_macro}
+                  onChange={updateMacroRecordSeqDelay}
                   radio={radio}
                 />
               )
