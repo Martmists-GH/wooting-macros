@@ -2350,97 +2350,97 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tauri-apps/api@npm:^1.5.4":
-  version: 1.5.4
-  resolution: "@tauri-apps/api@npm:1.5.4"
-  checksum: e85ce15fdcbcc5b867bf36a0052b7f10ccb2fd5f3c640f8b14e35cee2395f57b46094cbe9a451ec75b3021acbc93d4d990dbe05a7dde82f34bc9a831d8a74312
+"@tauri-apps/api@npm:^1.5.6":
+  version: 1.5.6
+  resolution: "@tauri-apps/api@npm:1.5.6"
+  checksum: ad341297aafdad64d62677e4fac152c9a94e9da0f17e291a764d9bfb9fa2961426ce75f6ff363cc586af40f28f695011c962fff889206cf15c5b1b0c724a5ab1
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-darwin-arm64@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-darwin-arm64@npm:1.5.13"
+"@tauri-apps/cli-darwin-arm64@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-darwin-arm64@npm:1.5.14"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-darwin-x64@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-darwin-x64@npm:1.5.13"
+"@tauri-apps/cli-darwin-x64@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-darwin-x64@npm:1.5.14"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-arm-gnueabihf@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-linux-arm-gnueabihf@npm:1.5.13"
+"@tauri-apps/cli-linux-arm-gnueabihf@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-linux-arm-gnueabihf@npm:1.5.14"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-arm64-gnu@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-linux-arm64-gnu@npm:1.5.13"
+"@tauri-apps/cli-linux-arm64-gnu@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-linux-arm64-gnu@npm:1.5.14"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-arm64-musl@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-linux-arm64-musl@npm:1.5.13"
+"@tauri-apps/cli-linux-arm64-musl@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-linux-arm64-musl@npm:1.5.14"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-x64-gnu@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-linux-x64-gnu@npm:1.5.13"
+"@tauri-apps/cli-linux-x64-gnu@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-linux-x64-gnu@npm:1.5.14"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-linux-x64-musl@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-linux-x64-musl@npm:1.5.13"
+"@tauri-apps/cli-linux-x64-musl@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-linux-x64-musl@npm:1.5.14"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-win32-arm64-msvc@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-win32-arm64-msvc@npm:1.5.13"
+"@tauri-apps/cli-win32-arm64-msvc@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-win32-arm64-msvc@npm:1.5.14"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-win32-ia32-msvc@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-win32-ia32-msvc@npm:1.5.13"
+"@tauri-apps/cli-win32-ia32-msvc@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-win32-ia32-msvc@npm:1.5.14"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli-win32-x64-msvc@npm:1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli-win32-x64-msvc@npm:1.5.13"
+"@tauri-apps/cli-win32-x64-msvc@npm:1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli-win32-x64-msvc@npm:1.5.14"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@tauri-apps/cli@npm:^1.5.13":
-  version: 1.5.13
-  resolution: "@tauri-apps/cli@npm:1.5.13"
+"@tauri-apps/cli@npm:^1.5.14":
+  version: 1.5.14
+  resolution: "@tauri-apps/cli@npm:1.5.14"
   dependencies:
-    "@tauri-apps/cli-darwin-arm64": 1.5.13
-    "@tauri-apps/cli-darwin-x64": 1.5.13
-    "@tauri-apps/cli-linux-arm-gnueabihf": 1.5.13
-    "@tauri-apps/cli-linux-arm64-gnu": 1.5.13
-    "@tauri-apps/cli-linux-arm64-musl": 1.5.13
-    "@tauri-apps/cli-linux-x64-gnu": 1.5.13
-    "@tauri-apps/cli-linux-x64-musl": 1.5.13
-    "@tauri-apps/cli-win32-arm64-msvc": 1.5.13
-    "@tauri-apps/cli-win32-ia32-msvc": 1.5.13
-    "@tauri-apps/cli-win32-x64-msvc": 1.5.13
+    "@tauri-apps/cli-darwin-arm64": 1.5.14
+    "@tauri-apps/cli-darwin-x64": 1.5.14
+    "@tauri-apps/cli-linux-arm-gnueabihf": 1.5.14
+    "@tauri-apps/cli-linux-arm64-gnu": 1.5.14
+    "@tauri-apps/cli-linux-arm64-musl": 1.5.14
+    "@tauri-apps/cli-linux-x64-gnu": 1.5.14
+    "@tauri-apps/cli-linux-x64-musl": 1.5.14
+    "@tauri-apps/cli-win32-arm64-msvc": 1.5.14
+    "@tauri-apps/cli-win32-ia32-msvc": 1.5.14
+    "@tauri-apps/cli-win32-x64-msvc": 1.5.14
   dependenciesMeta:
     "@tauri-apps/cli-darwin-arm64":
       optional: true
@@ -2464,7 +2464,7 @@ __metadata:
       optional: true
   bin:
     tauri: tauri.js
-  checksum: cc07092464076c021db817a0f6cd638941261b360c06fadaf16f502314f66267e97c18661c7cad44afb3010f272c29553f7fc0e2e0d6b8e1bde411bbfb84849a
+  checksum: 635eeb3a5793e46fbf52b9c7572d3efac5180772578b6899905223a1f46759afad842aa09b6ee14c79789756bcbbb0b17f7618f70c9d25237aef17bb46c882e1
   languageName: node
   linkType: hard
 
@@ -2547,13 +2547,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.15":
-  version: 7.0.15
-  resolution: "@types/json-schema@npm:7.0.15"
-  checksum: 97ed0cb44d4070aecea772b7b2e2ed971e10c81ec87dd4ecc160322ffa55ff330dace1793489540e3e318d90942064bb697cc0f8989391797792d919737b3b98
-  languageName: node
-  linkType: hard
-
 "@types/lodash.mergewith@npm:4.6.7":
   version: 4.6.7
   resolution: "@types/lodash.mergewith@npm:4.6.7"
@@ -2570,12 +2563,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.12.11":
-  version: 20.12.11
-  resolution: "@types/node@npm:20.12.11"
+"@types/node@npm:^20.12.12":
+  version: 20.12.12
+  resolution: "@types/node@npm:20.12.12"
   dependencies:
     undici-types: ~5.26.4
-  checksum: 0cc06bb69cd8150e96fcf65fa3d7f2eeebedf110a99e1834a7fa55bd6c04e7b6d73f74321a2acfc569ca300c0b88d8e1b702ce245b3802f6e5f6a8987fef451a
+  checksum: 5373983874b9af7c216e7ca5d26b32a8d9829c703a69f1e66f2113598b5be8582c0e009ca97369f1ec9a6282b3f92812208d06eb1e9fc3bd9b939b022303d042
   languageName: node
   linkType: hard
 
@@ -2622,13 +2615,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.3.1":
-  version: 18.3.1
-  resolution: "@types/react@npm:18.3.1"
+"@types/react@npm:^18.3.2":
+  version: 18.3.2
+  resolution: "@types/react@npm:18.3.2"
   dependencies:
     "@types/prop-types": "*"
     csstype: ^3.0.2
-  checksum: 9224ef319a0c2b7f66e7e7f06012aa5eb638a6c76c9742843eab1a5d243f2bed5ff829ddbb41efd60d33a266420528adfcb84cb93f238b00e905f98c3a355768
+  checksum: d0b8b9d0ede6cd28dbbe34106d914b5e3652d9d7aa9d0f32fe6171506b6fc7c826d9d6571642976a5422bd29c5022fd893a710ed59a1177a0c1df8e02cf17ffe
   languageName: node
   linkType: hard
 
@@ -2639,27 +2632,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/semver@npm:^7.5.8":
-  version: 7.5.8
-  resolution: "@types/semver@npm:7.5.8"
-  checksum: ea6f5276f5b84c55921785a3a27a3cd37afee0111dfe2bcb3e03c31819c197c782598f17f0b150a69d453c9584cd14c4c4d7b9a55d2c5e6cacd4d66fdb3b3663
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/eslint-plugin@npm:^7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:7.8.0"
+"@typescript-eslint/eslint-plugin@npm:^7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:7.9.0"
   dependencies:
     "@eslint-community/regexpp": ^4.10.0
-    "@typescript-eslint/scope-manager": 7.8.0
-    "@typescript-eslint/type-utils": 7.8.0
-    "@typescript-eslint/utils": 7.8.0
-    "@typescript-eslint/visitor-keys": 7.8.0
-    debug: ^4.3.4
+    "@typescript-eslint/scope-manager": 7.9.0
+    "@typescript-eslint/type-utils": 7.9.0
+    "@typescript-eslint/utils": 7.9.0
+    "@typescript-eslint/visitor-keys": 7.9.0
     graphemer: ^1.4.0
     ignore: ^5.3.1
     natural-compare: ^1.4.0
-    semver: ^7.6.0
     ts-api-utils: ^1.3.0
   peerDependencies:
     "@typescript-eslint/parser": ^7.0.0
@@ -2667,44 +2651,44 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 2a95bcbd2467892a56f4b0eb262c411abeb15f8d6b581d132fc2a57aa47eb4edc751f02e1a8ac88b7a3330c770a61cdaf6456aa7837b0ee50b5468397324b3fb
+  checksum: 0437d3d7a9adbd519e614a90633cd35fad4c9433d6b8902fd0f989907a3e0f05afc3a50ca35a8a02764e7333b92f5378088f657882f28c14a4d7e2433fea2766
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/parser@npm:7.8.0"
+"@typescript-eslint/parser@npm:^7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/parser@npm:7.9.0"
   dependencies:
-    "@typescript-eslint/scope-manager": 7.8.0
-    "@typescript-eslint/types": 7.8.0
-    "@typescript-eslint/typescript-estree": 7.8.0
-    "@typescript-eslint/visitor-keys": 7.8.0
+    "@typescript-eslint/scope-manager": 7.9.0
+    "@typescript-eslint/types": 7.9.0
+    "@typescript-eslint/typescript-estree": 7.9.0
+    "@typescript-eslint/visitor-keys": 7.9.0
     debug: ^4.3.4
   peerDependencies:
     eslint: ^8.56.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: fd077b7f7e1348e64b739a1579dcaebb6933392635614d27008d5a521809992df7b93771dd54efe809b320d224c10ff024ea7ef7c7c578f673a7a937e869c314
+  checksum: df80976afba65cf09583874a4330e7e275ff7b599863124ae911fa52f1f097948cc04bcea711da44688ee6beb2713f1c377604224a965869e527ad7e3f30ca72
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/scope-manager@npm:7.8.0"
+"@typescript-eslint/scope-manager@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/scope-manager@npm:7.9.0"
   dependencies:
-    "@typescript-eslint/types": 7.8.0
-    "@typescript-eslint/visitor-keys": 7.8.0
-  checksum: 2ab9158f2d055f0917b7004568e50fec112d4a7abcc36a04bdded4fbb32f5ac3bb2ed57e12aec9cc1f41a9322dcd97d7bc1529e3a90640a6c431887e75099527
+    "@typescript-eslint/types": 7.9.0
+    "@typescript-eslint/visitor-keys": 7.9.0
+  checksum: d63f140e6112df6a4902b670c4c1ad02e9dcbe46c85c859f098e43f2543102138874bfc4a31c61a466e7e526d280c09d6fddc33dea84c946db43a24d52108724
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/type-utils@npm:7.8.0"
+"@typescript-eslint/type-utils@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/type-utils@npm:7.9.0"
   dependencies:
-    "@typescript-eslint/typescript-estree": 7.8.0
-    "@typescript-eslint/utils": 7.8.0
+    "@typescript-eslint/typescript-estree": 7.9.0
+    "@typescript-eslint/utils": 7.9.0
     debug: ^4.3.4
     ts-api-utils: ^1.3.0
   peerDependencies:
@@ -2712,23 +2696,23 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 17d4d7aaf21d52dbc96c22f3e81387bb3cf767686f4728a68646e97be33886830b252d82eaa3563cca2fb0bf991df462e1d2e44aec60de3d3fca01cb505dfce3
+  checksum: 0e87d4d7ee38cf2f1fb899b6a466d9c6637a917bd7534dab9f58a709a5dbe72d98486187e900d553f2f9140799217d290402f4fdaf141253f56078019034ab3a
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/types@npm:7.8.0"
-  checksum: fb4b0e09cae2cf66e4699f0f978a39e7aa82aab1112858ca40265c1aeb628cdecd95856beaf727b8479b1abeac181601241348f5d387fcd1f51293eb65b18a54
+"@typescript-eslint/types@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/types@npm:7.9.0"
+  checksum: 84c7e28b55a079dcd358aa6c20092819a20c20b167de4b04d86399e2ea1a0e28df92ee518c3b9236b7cd2cd72da81fc93e4bece48346e4a382723f4c857623ac
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/typescript-estree@npm:7.8.0"
+"@typescript-eslint/typescript-estree@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/typescript-estree@npm:7.9.0"
   dependencies:
-    "@typescript-eslint/types": 7.8.0
-    "@typescript-eslint/visitor-keys": 7.8.0
+    "@typescript-eslint/types": 7.9.0
+    "@typescript-eslint/visitor-keys": 7.9.0
     debug: ^4.3.4
     globby: ^11.1.0
     is-glob: ^4.0.3
@@ -2738,34 +2722,31 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 278ac7f988bde27ac5bf8400ad141125783895be53ba2cd1ad2faaa30b01dbcbc026a6aa2db4a877f9453c8c2811465cb7b91c30f15ebd9450415c9b27250a1d
+  checksum: 45da640ca585bf89b896a06a71889be2cdf25e5efa5ebf1d3196bf7d3ce256f0432d4caa4a04a0d877f2db504c5c3a50a37310f56b2c84af49704cea3d0a596b
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/utils@npm:7.8.0"
+"@typescript-eslint/utils@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/utils@npm:7.9.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
-    "@types/json-schema": ^7.0.15
-    "@types/semver": ^7.5.8
-    "@typescript-eslint/scope-manager": 7.8.0
-    "@typescript-eslint/types": 7.8.0
-    "@typescript-eslint/typescript-estree": 7.8.0
-    semver: ^7.6.0
+    "@typescript-eslint/scope-manager": 7.9.0
+    "@typescript-eslint/types": 7.9.0
+    "@typescript-eslint/typescript-estree": 7.9.0
   peerDependencies:
     eslint: ^8.56.0
-  checksum: 770c4742acf3a1845dcc7c280d6af3d338b02187c333f7df4a5f974ba69f56d6be84b888b1d951674f5aab2317b32d3f29a96292d992a87d1a9238d34b15c943
+  checksum: bec0bb97ec430247534e0eb60f0ba86f739968351d73fda57a1e7b70417057f3eec438d3f1014336fcb35e2c18de1eb444a0cb59de78de0921d10d5066907356
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:7.8.0":
-  version: 7.8.0
-  resolution: "@typescript-eslint/visitor-keys@npm:7.8.0"
+"@typescript-eslint/visitor-keys@npm:7.9.0":
+  version: 7.9.0
+  resolution: "@typescript-eslint/visitor-keys@npm:7.9.0"
   dependencies:
-    "@typescript-eslint/types": 7.8.0
+    "@typescript-eslint/types": 7.9.0
     eslint-visitor-keys: ^3.4.3
-  checksum: 9e635f783188733b41fd6b34053f9a06a85f24c24734882e341116c496e04561fa3ad93c951d4bd4d25a76c2a31219f4329b16ade85bf03222a492dc77a3418f
+  checksum: 29ed6af19f8e00110ccf2e0526ef8e4162ac18b2ca81a26f34b28719b2723faa028ff3485722bfa64864b23428e8d29453a7593f082d593326c21fd94f1499d9
   languageName: node
   linkType: hard
 
@@ -4200,9 +4181,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^11.1.9":
-  version: 11.1.9
-  resolution: "framer-motion@npm:11.1.9"
+"framer-motion@npm:^11.2.3":
+  version: 11.2.3
+  resolution: "framer-motion@npm:11.2.3"
   dependencies:
     tslib: ^2.4.0
   peerDependencies:
@@ -4216,7 +4197,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: a7dcd8bfa1780fe8364c7e039a6e37d94edcdec6ee618355d649aab99451cb666ee4c2b5b8b5d2bcd1ccdba44fbb2cdd57deed9325c503d544d3f9a34fdfce27
+  checksum: b893b36d226094feaf67b732b9a7e0662a2775b8502466142058eea9adaaeedf39809fe3ff7086d74a56ab42319835bf7cfde6a0a22daa4ef58140de8fb431e3
   languageName: node
   linkType: hard
 
@@ -7088,22 +7069,22 @@ __metadata:
     "@emotion/styled": ^11.11.5
     "@fontsource/montserrat": ^5.0.18
     "@formkit/auto-animate": 0.8.2
-    "@tauri-apps/api": ^1.5.4
-    "@tauri-apps/cli": ^1.5.13
+    "@tauri-apps/api": ^1.5.6
+    "@tauri-apps/cli": ^1.5.14
     "@types/eslint": ^8.56.10
-    "@types/node": ^20.12.11
+    "@types/node": ^20.12.12
     "@types/prettier": ^3.0.0
-    "@types/react": ^18.3.1
+    "@types/react": ^18.3.2
     "@types/react-dom": ^18.3.0
-    "@typescript-eslint/eslint-plugin": ^7.8.0
-    "@typescript-eslint/parser": ^7.8.0
+    "@typescript-eslint/eslint-plugin": ^7.9.0
+    "@typescript-eslint/parser": ^7.9.0
     "@vitejs/plugin-react": ^4.2.1
     emoji-mart: ^5.6.0
     eslint: ^8.57.0
     eslint-config-prettier: ^9.1.0
     eslint-plugin-react: ^7.34.1
     eslint-plugin-react-hooks: ^4.6.2
-    framer-motion: ^11.1.9
+    framer-motion: ^11.2.3
     prettier: ^3.2.5
     react: ^18.3.1
     react-dom: ^18.3.1
