@@ -88,6 +88,10 @@ function App() {
             isEditing={false}
             onOpenMacroSettingsModal={onOpenMacroSettings}
           />
+          <MacroSettingsModal
+            isOpen={isOpenMacroSettings}
+            onClose={onCloseMacroSettings}
+          />
         </MacroProvider>
       )}
       {viewState === ViewState.Editview && (
@@ -96,15 +100,13 @@ function App() {
             isEditing={true}
             onOpenMacroSettingsModal={onOpenMacroSettings}
           />
+          <MacroSettingsModal
+            isOpen={isOpenMacroSettings}
+            onClose={onCloseMacroSettings}
+          />
         </MacroProvider>
       )}
       <SettingsModal isOpen={isOpenSettings} onClose={onCloseSettings} />
-      <MacroProvider>
-      <MacroSettingsModal
-        isOpen={isOpenMacroSettings}
-        onClose={onCloseMacroSettings}
-      />
-      </MacroProvider>
     </Flex>
   )
 }

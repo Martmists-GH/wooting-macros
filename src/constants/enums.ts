@@ -9,15 +9,10 @@ export enum MacroType {
   Single,
   Toggle,
   OnHold, // TODO: need to add space later when displaying the macro type name text
-  RepeatX,
+  RepeatX
 }
 
-
-export const MacroSettingOptionDefiniton: string[]=[
-  'Ignore',
-  'On',
-  'Off',
-]
+export const MacroSettingOptionDefiniton: string[] = ['Ignore', 'Off', 'On']
 
 export enum MacroSettingOption {
   IGNORED,
@@ -25,13 +20,12 @@ export enum MacroSettingOption {
   OVERRIDE_DISABLED
 }
 
-
 /** Currently unused */
 export const MacroTypeDefinitions: string[] = [
   'SINGLE:\nThe macro will play once after the trigger key(s) is pressed.',
   'TOGGLE (BETA):\nThe macro will continuously repeat until the trigger key(s) is pressed again.',
   'ON HOLD (BETA):\nThe macro will only play while the trigger key(s) is pressed.',
-  'REPEAT:\nThe macro will play X amount of times after the trigger key(s) is pressed.',
+  'REPEAT:\nThe macro will play X amount of times after the trigger key(s) is pressed.'
 ]
 
 export enum KeyType {
@@ -59,10 +53,9 @@ export enum HIDCategory {
   Numpad,
   Function, // F1-24
   Modifier,
-  Navigation, // arrow keys and pg up, pg down, etc
+  Navigation // arrow keys and pg up, pg down, etc
 }
 
 /** To be Expanded */
-export enum PluginGroup {
-  // e.g. PhillipsHue, or OBS
-}
+export enum PluginGroup {}
+// e.g. PhillipsHue, or OBS

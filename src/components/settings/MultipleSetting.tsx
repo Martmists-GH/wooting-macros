@@ -14,10 +14,6 @@ export default function MultipleSetting({
   onChange,
   radio
 }: RadioCardProps) {
-  console.log(
-    'SELECTED:' + MacroSettingOptionDefiniton[selectedValue],
-    'VALUE: ' + value
-  )
   const { getInputProps, getRadioProps } = useRadio({
     ...radio,
     isChecked: value === MacroSettingOptionDefiniton[selectedValue],
@@ -47,8 +43,6 @@ export default function MultipleSetting({
           }}
           px={2}
           py={1}
-          // onClick={() => onChange(value)}
-
         >
           {value}
         </Box>
