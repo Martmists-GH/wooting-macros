@@ -40,7 +40,7 @@ export type MacroState = {
   updateMacroType: (newType: MacroType) => void
   updateMacroRepeatAmount: (newAmount: number) => void
   updateMacroRecordSeqDelay: (newValue: number) => void
-  getMacroRecordSeqDelayIndex: () => number
+  getMacroRecordSeqDelayIndex: (macro: Macro) => number
   updateTrigger: (newElement: TriggerEventType) => void
   updateAllowWhileOtherKeys: (value: boolean) => void
   onElementAdd: (newElement: ActionEventType) => void
@@ -72,10 +72,10 @@ export type SettingsState = {
 // Input Event Types
 export type TriggerEventType =
   | {
-  type: 'KeyPressEvent'
-  data: number[]
-  allow_while_other_keys: boolean
-}
+      type: 'KeyPressEvent'
+      data: number[]
+      allow_while_other_keys: boolean
+    }
   | { type: 'MouseEvent'; data: MouseButton }
 
 export type KeyPressEventAction = {
@@ -168,10 +168,10 @@ export type MousePressAction =
   | { type: 'DownUp'; button: MouseButton; duration: number }
 
 export type MacroIndividualCommand =
-  | {type: "Start" }
-  | {type: "Stop" }
-  | {type: "Abort" }
-  | {type: "AbortAll" };
+  | { type: 'Start' }
+  | { type: 'Stop' }
+  | { type: 'Abort' }
+  | { type: 'AbortAll' }
 
 export type MouseAction = { type: 'Press'; data: MousePressAction }
 

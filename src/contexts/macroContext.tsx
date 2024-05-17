@@ -7,12 +7,7 @@ import {
   useMemo,
   useState
 } from 'react'
-import {
-  MacroSettingOption,
-  MacroSettingOptionDefiniton,
-  MacroType,
-  ViewState
-} from '../constants/enums'
+import { MacroType, ViewState } from '../constants/enums'
 import { checkIfElementIsEditable } from '../constants/utils'
 import {
   ActionEventType,
@@ -188,7 +183,7 @@ function MacroProvider({ children }: MacroProviderProps) {
     },
     [macro, setMacro]
   )
-  const getMacroRecordSeqDelayIndex = useCallback(() => {
+  const getMacroRecordSeqDelayIndex = useCallback((macro: Macro) => {
     let value: number = 0
     switch (macro.record_delay_sequence) {
       case true:
@@ -202,7 +197,8 @@ function MacroProvider({ children }: MacroProviderProps) {
     }
 
     return value
-  }, [macro])
+  }, [])
+
   const updateMacroIcon = useCallback(
     (newIcon: string) => {
       setMacro({ ...macro, icon: newIcon })

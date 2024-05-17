@@ -102,7 +102,8 @@ export default function Header({ isEditing }: Props) {
         currentMacro.trigger === macro.trigger &&
         sequence === macro.sequence &&
         currentMacro.name === macro.name &&
-        currentMacro.icon === macro.icon
+        currentMacro.icon === macro.icon &&
+        currentMacro.record_delay_sequence === macro.record_delay_sequence
       ) {
         changeSelectedMacroIndex(undefined)
         return
@@ -128,8 +129,8 @@ export default function Header({ isEditing }: Props) {
     currentMacro,
     hasUserChangedIcon,
     macro.icon,
+    macro.record_delay_sequence,
     macro.name,
-    macro.macro_type,
     macro.sequence,
     macro.trigger,
     onUnsavedChangesModalOpen,
