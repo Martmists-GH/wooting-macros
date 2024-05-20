@@ -83,13 +83,10 @@ function MultipleSetting({
     onChange: () => onChange(MacroSettingOptionDefiniton.indexOf(value))
   })
 
-  const kebabColour = useColorModeValue(
-    'primary-accent.200',
-    'primary-accent.200'
-  )
-
+  const bg = useColorModeValue('primary-light.50', 'primary-dark.700')
   const input = getInputProps()
   const checkbox = getRadioProps()
+  const selectedItem = MacroSettingOptionDefiniton.indexOf(value)
 
   return (
     <HStack w="full" justifyContent="space-between" spacing={16}>
@@ -103,16 +100,22 @@ function MultipleSetting({
           borderRadius="md"
           fontWeight="semi-bold"
           userSelect="none"
+          bg={bg}
           _checked={{
             textColor: 'black',
             bg:
-              MacroSettingOptionDefiniton.indexOf(value) === 0
+              selectedItem === 0
                 ? 'primary-accent.600'
-                : MacroSettingOptionDefiniton.indexOf(value) === 1
+                : selectedItem === 1
                   ? 'red.600'
                   : 'teal.600',
             color: 'white',
-            border: 'none'
+            borderColor:
+              selectedItem === 0
+                ? 'primary-accent.600'
+                : selectedItem === 1
+                  ? 'red.600'
+                  : 'teal.600'
           }}
           px={2}
           py={1}
