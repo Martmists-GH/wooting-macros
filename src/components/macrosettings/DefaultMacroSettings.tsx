@@ -3,7 +3,7 @@ import { useMacroContext } from '../../contexts/macroContext'
 import RadioBoxButton from '../settings/MultipleSetting'
 
 export default function DefaultMacroSettings() {
-  const { updateMacroRecordSeqDelay } = useMacroContext()
+  const {} = useMacroContext()
 
   return (
     <VStack w="full" spacing="4">
@@ -13,11 +13,6 @@ export default function DefaultMacroSettings() {
         </Text>
       </VStack>
       <VStack w="full" spacing={[4]}>
-        <RadioBoxButton
-          title="Record sequence delay"
-          description="Record delay when recording sequence"
-          onChange={updateMacroRecordSeqDelay}
-        />
         <Divider />
       </VStack>
     </VStack>
