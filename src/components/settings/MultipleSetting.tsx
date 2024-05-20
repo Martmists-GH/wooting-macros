@@ -101,6 +101,7 @@ function MultipleSetting({
           fontWeight="semi-bold"
           userSelect="none"
           bg={bg}
+          transition="background-color 0.3s ease"
           _checked={{
             textColor: 'black',
             bg:
