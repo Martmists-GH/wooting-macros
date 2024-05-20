@@ -101,45 +101,27 @@ export default function SequencingArea({ onOpenMacroSettingsModal }: Props) {
         }
       } else {
         if (checkIfKeypress(item)) {
-          if (macro.record_delay_sequence ?? false) {
-            onElementsAdd([
-              {
-                type: 'DelayEventAction',
-                data: timeDiff
-              },
-              {
-                type: 'KeyPressEventAction',
-                data: item
-              }
-            ])
-          } else {
-            onElementsAdd([
-              {
-                type: 'KeyPressEventAction',
-                data: item
-              }
-            ])
-          }
+          onElementsAdd([
+            {
+              type: 'DelayEventAction',
+              data: timeDiff
+            },
+            {
+              type: 'KeyPressEventAction',
+              data: item
+            }
+          ])
         } else {
-          if (macro.record_delay_sequence ?? false) {
-            onElementsAdd([
-              {
-                type: 'DelayEventAction',
-                data: timeDiff
-              },
-              {
-                type: 'MouseEventAction',
-                data: { type: 'Press', data: item }
-              }
-            ])
-          } else {
-            onElementsAdd([
-              {
-                type: 'MouseEventAction',
-                data: { type: 'Press', data: item }
-              }
-            ])
-          }
+          onElementsAdd([
+            {
+              type: 'DelayEventAction',
+              data: timeDiff
+            },
+            {
+              type: 'MouseEventAction',
+              data: { type: 'Press', data: item }
+            }
+          ])
         }
       }
     },
