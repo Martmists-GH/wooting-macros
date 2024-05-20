@@ -101,6 +101,7 @@ function MultipleSetting({
           borderWidth="1px"
           borderColor="gray"
           borderRadius="md"
+          fontWeight="semi-bold"
           userSelect="none"
           _checked={{
             textColor: 'black',
@@ -110,7 +111,8 @@ function MultipleSetting({
                 : MacroSettingOptionDefiniton.indexOf(value) === 1
                   ? 'red.600'
                   : 'teal.600',
-            color: 'white'
+            color: 'white',
+            border: 'none'
           }}
           px={2}
           py={1}

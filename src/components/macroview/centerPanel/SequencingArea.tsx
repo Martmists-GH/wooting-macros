@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { DeleteIcon, SettingsIcon, TimeIcon } from '@chakra-ui/icons'
 import { useCallback } from 'react'
-import { Keypress, Macro, MousePressAction } from '../../../types'
+import { Keypress, MousePressAction } from '../../../types'
 import { useMacroContext } from '../../../contexts/macroContext'
 import useRecordingSequence from '../../../hooks/useRecordingSequence'
 import { useSettingsContext } from '../../../contexts/settingsContext'
@@ -32,11 +32,12 @@ interface Props {
 
 export default function SequencingArea({ onOpenMacroSettingsModal }: Props) {
   const {
+    macro,
     sequence,
     willCauseTriggerLooping,
     onElementAdd,
     onElementsAdd,
-    updateElement,
+    updateElement
   } = useMacroContext()
   const { config } = useSettingsContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -100,34 +101,55 @@ export default function SequencingArea({ onOpenMacroSettingsModal }: Props) {
         }
       } else {
         if (checkIfKeypress(item)) {
-          onElementsAdd([
-            //TODO: This is new toggle
-
-            {
-              type: 'DelayEventAction',
-              data: timeDiff
-            },
-            {
-              type: 'KeyPressEventAction',
-              data: item
-            }
-          ])
+          if (macro.record_delay_sequence ?? false) {
+            onElementsAdd([
+              {
+                type: 'DelayEventAction',
+                data: timeDiff
+              },
+              {
+                type: 'KeyPressEventAction',
+                data: item
+              }
+            ])
+          } else {
+            onElementsAdd([
+              {
+                type: 'KeyPressEventAction',
+                data: item
+              }
+            ])
+          }
         } else {
-          onElementsAdd([
-            //TODO: This is new toggle
-            {
-              type: 'DelayEventAction',
-              data: timeDiff
-            },
-            {
-              type: 'MouseEventAction',
-              data: { type: 'Press', data: item }
-            }
-          ])
+          if (macro.record_delay_sequence ?? false) {
+            onElementsAdd([
+              {
+                type: 'DelayEventAction',
+                data: timeDiff
+              },
+              {
+                type: 'MouseEventAction',
+                data: { type: 'Press', data: item }
+              }
+            ])
+          } else {
+            onElementsAdd([
+              {
+                type: 'MouseEventAction',
+                data: { type: 'Press', data: item }
+              }
+            ])
+          }
         }
       }
     },
-    [onElementAdd, onElementsAdd, sequence.length, updateElement]
+    [
+      macro.record_delay_sequence,
+      onElementAdd,
+      onElementsAdd,
+      sequence.length,
+      updateElement
+    ]
   )
 
   const { recording, startRecording, stopRecording } =
