@@ -11,7 +11,7 @@ import useMainBgColour from '../../hooks/useMainBgColour'
 import useBorderColour from '../../hooks/useBorderColour'
 import { error } from 'tauri-plugin-log'
 
-import { SearchBar } from "../leftPanel/SearchBar";
+import { SearchBar } from '../leftPanel/SearchBar'
 
 interface Props {
   onOpenSettingsModal: () => void
@@ -118,7 +118,7 @@ export default function LeftPanel({
       <VStack w="full" px={4} pb={4}>
         <Button
           w="full"
-          colorScheme={isMacroOutputEnabled ? 'green' : 'orange'}
+          colorScheme={isMacroOutputEnabled ? 'teal' : 'orange'}
           size="sm"
           onClick={() => {
             updateMacroOutput(isMacroOutputEnabled)
