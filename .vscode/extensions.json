@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "rust-lang.rust-analyzer",
         "esbenp.prettier-vscode",
         "ibm.output-colorizer",
         "oderwat.indent-rainbow",
@@ -12,6 +11,9 @@
         "usernamehw.errorlens",
         "serayuzgur.crates",
         "naumovs.color-highlight",
-        "formulahendry.auto-rename-tag"
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "visualstudioexptteam.vscodeintellicode",
+        "natqe.reload",
+        "rust-lang.rust-analyzer"
     ]
 }
