@@ -77,6 +77,7 @@ export function checkIfKeyShouldContinueTriggerRecording(hid: number): boolean {
   )
 }
 
+// Allows you to select an element in the timeline and edit it in the right pane.
 export const checkIfElementIsEditable = (element: ActionEventType): boolean => {
   if (element.type === 'SystemEventAction') {
     switch (element.data.type) {
@@ -87,6 +88,8 @@ export const checkIfElementIsEditable = (element: ActionEventType): boolean => {
           return true
         }
         return false
+      case 'OsShortcut':
+        return true
       default:
         return false
     }
@@ -109,9 +112,8 @@ export const getElementDisplayString = (element: ActionEventType): string => {
       switch (element.data.type) {
         case 'Open':
           if (element.data.action.data !== '') {
-            return `Open ${element.data.action.type.toString()}: ${
-              element.data.action.data
-            }`
+            return `Open ${element.data.action.type.toString()}: ${element.data.action.data
+              }`
           }
           return (
             sysEventLookup.get(element.data.action.type)?.displayString ||
@@ -129,6 +131,11 @@ export const getElementDisplayString = (element: ActionEventType): string => {
           ) {
             return 'Paste Text: ' + element.data.action.data
           }
+          return (
+            sysEventLookup.get(element.data.action.type)?.displayString ||
+            'error'
+          )
+        case 'OsShortcut':
           return (
             sysEventLookup.get(element.data.action.type)?.displayString ||
             'error'

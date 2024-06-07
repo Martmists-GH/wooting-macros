@@ -70,10 +70,10 @@ export type SettingsState = {
 // Input Event Types
 export type TriggerEventType =
   | {
-  type: 'KeyPressEvent'
-  data: number[]
-  allow_while_other_keys: boolean
-}
+    type: 'KeyPressEvent'
+    data: number[]
+    allow_while_other_keys: boolean
+  }
   | { type: 'MouseEvent'; data: MouseButton }
 
 export type KeyPressEventAction = {
@@ -165,10 +165,10 @@ export type MousePressAction =
   | { type: 'DownUp'; button: MouseButton; duration: number }
 
 export type MacroIndividualCommand =
-  | {type: "Start" }
-  | {type: "Stop" }
-  | {type: "Abort" }
-  | {type: "AbortAll" };
+  | { type: "Start" }
+  | { type: "Stop" }
+  | { type: "Abort" }
+  | { type: "AbortAll" };
 
 export type MouseAction = { type: 'Press'; data: MousePressAction }
 
@@ -176,7 +176,7 @@ export type SystemAction =
   | { type: 'Open'; action: DirectoryAction }
   | { type: 'Volume'; action: VolumeAction }
   | { type: 'Clipboard'; action: ClipboardAction }
-// | { type: 'Brightness'; action: MonitorBrightnessAction }
+  | { type: 'OsShortcut'; action: OsShortcut }
 
 export type DirectoryAction =
   | { type: 'Directory'; data: string }

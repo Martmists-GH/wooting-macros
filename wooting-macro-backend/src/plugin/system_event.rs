@@ -8,6 +8,9 @@ use rdev;
 use tokio::sync::mpsc::UnboundedSender;
 use url::Url;
 
+use crate::HID_TO_RDEV;
+
+use super::delay::DEFAULT_DELAY;
 use super::util;
 
 // Frequently used keys within the code.
@@ -21,14 +24,43 @@ pub enum DirectoryAction {
     Directory { data: PathBuf },
     Website { data: Url },
 }
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq, Hash, Eq)]
+#[serde(tag = "type")]
+/// The type of action to perform. This is used to determine which action to perform.
+pub enum ClipboardAction {
+    SetClipboard { data: String },
+    Copy,
+    GetClipboard,
+    Paste,
+    PasteUserDefinedString { data: String },
+    Sarcasm,
+}
+
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq, Hash, Eq)]
+#[serde(tag = "type")]
+/// Key shortcut alias to mute/increase/decrease volume.
+pub enum VolumeAction {
+    LowerVolume,
+    IncreaseVolume,
+    ToggleMute,
+}
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq, Hash, Eq)]
 #[serde(tag = "type")]
 /// Types of actions related to the OS to perform.
 pub enum SystemAction {
-    Open { action: DirectoryAction },
-    Volume { action: VolumeAction },
-    Clipboard { action: ClipboardAction },
+    Open {
+        action: DirectoryAction,
+    },
+    Volume {
+        action: VolumeAction,
+    },
+    Clipboard {
+        action: ClipboardAction,
+    },
+    OsShortcut {
+        action: Vec<super::key_press::KeyPress>,
+    },
 }
 
 impl SystemAction {
@@ -92,7 +124,7 @@ impl SystemAction {
                     util::direct_send_hotkey(send_channel, COPY_HOTKEY.to_vec())?;
 
                     // Delay is required to make Discord, and some other apps cooperate properly.
-                    tokio::time::sleep(time::Duration::from_millis(10)).await;
+                    tokio::time::sleep(time::Duration::from_millis(DEFAULT_DELAY)).await;
 
                     // Transform the text
                     let content = transform_text(
@@ -107,6 +139,16 @@ impl SystemAction {
                     util::direct_send_hotkey(send_channel, PASTE_HOTKEY.to_vec())?;
                 }
             },
+            SystemAction::OsShortcut { action } => {
+                for key in action.iter() {
+                    send_channel.send(rdev::EventType::KeyPress(HID_TO_RDEV[&key.keypress]))?;
+                }
+                tokio::time::sleep(time::Duration::from_millis(DEFAULT_DELAY)).await;
+
+                for key in action.iter().rev() {
+                    send_channel.send(rdev::EventType::KeyRelease(HID_TO_RDEV[&key.keypress]))?;
+                }
+            }
         }
         Ok(())
     }
@@ -127,25 +169,4 @@ fn transform_text(text: String) -> String {
             }
         })
         .collect()
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq, Hash, Eq)]
-#[serde(tag = "type")]
-/// The type of action to perform. This is used to determine which action to perform.
-pub enum ClipboardAction {
-    SetClipboard { data: String },
-    Copy,
-    GetClipboard,
-    Paste,
-    PasteUserDefinedString { data: String },
-    Sarcasm,
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq, Hash, Eq)]
-#[serde(tag = "type")]
-/// Key shortcut alias to mute/increase/decrease volume.
-pub enum VolumeAction {
-    LowerVolume,
-    IncreaseVolume,
-    ToggleMute,
 }

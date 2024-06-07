@@ -18,6 +18,15 @@ export class SystemEvent {
       description: "Opens any file on your computer."
     }
   }
+  static get OsShortcut(): SystemEventInfo {
+    return {
+      type: 'OsShortcut',
+      subtype: 'Shortcut',
+      displayString: 'System Shortcut',
+      defaultData: { type: 'OsShortcut', action: { type: 'Shortcut', data: '' } },
+      description: "Sends a shortcut to execute."
+    }
+  }
   static get OpenFolder(): SystemEventInfo {
     return {
       type: 'Open',
@@ -93,6 +102,7 @@ export class SystemEvent {
     SystemEvent.OpenFile,
     SystemEvent.OpenFolder,
     SystemEvent.OpenWebsite,
+    SystemEvent.OsShortcut,
     SystemEvent.Clipboard,
     SystemEvent.Sarcasm,
     SystemEvent.IncreaseVolume,

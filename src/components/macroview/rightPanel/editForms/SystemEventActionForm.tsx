@@ -2,6 +2,7 @@ import { SystemEventAction } from '../../../../types'
 import ClipboardForm from './ClipboardForm'
 import EmptyForm from './EmptyForm'
 import OpenEventForm from './OpenEventForm'
+import OsShortcutForm from './OsShortcutForm'
 
 interface Props {
   selectedElement: SystemEventAction
@@ -33,6 +34,13 @@ export default function SystemEventActionForm({
       } else {
         return <EmptyForm />
       }
+    case 'OsShortcut':
+      return (
+        <OsShortcutForm
+          selectedElementId={selectedElementId}
+          selectedElement={selectedElement}
+        />
+      )
     default:
       return <EmptyForm />
   }
