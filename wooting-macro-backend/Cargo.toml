@@ -22,7 +22,7 @@ rdev = { git = "https://github.com/medzernik/rdev", branch = "wootomation/1.2", 
 ] }
 halfbrown = { version = "0.2", features = ["serde"] }
 lazy_static = "1.4"
-tokio = { version = "1.37", features = ["full"] }
+tokio = { version = "1.38", features = ["full"] }
 tokio-serde = { version = "0.9", features = ["json"] }
 opener = "0.7"
 rodio = "0.18"
