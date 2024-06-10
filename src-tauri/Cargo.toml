@@ -16,13 +16,26 @@ tauri-build = { version = "1.5", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive", "rc"] }
-tauri = { version = "1.6", features = ["app-hide", "app-show", "clipboard-read-text", "clipboard-write-text", "dialog-open", "icon-png", "os-all", "shell-open", "system-tray", "updater"] }
-tokio = { version = "1.37", features = ["full"] }
+tauri = { version = "1.6", features = [
+    "app-hide",
+    "app-show",
+    "clipboard-read-text",
+    "clipboard-write-text",
+    "dialog-open",
+    "icon-png",
+    "os-all",
+    "shell-open",
+    "system-tray",
+    "updater",
+] }
+tokio = { version = "1.38", features = ["full"] }
 tokio-serde = { version = "0.9", features = ["json"] }
 wooting-macro-backend = { path = "../wooting-macro-backend" }
 auto-launch = "0.5"
 log = "0.4"
-tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1", features= ["colored"] }
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1", features = [
+    "colored",
+] }
 byte-unit = "5.1"
 anyhow = "1.0"
 

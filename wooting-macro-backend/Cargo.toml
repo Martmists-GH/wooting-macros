@@ -22,14 +22,14 @@ rdev = { git = "https://github.com/medzernik/rdev", branch = "main", features = 
 ] }
 halfbrown = { version = "0.2", features = ["serde"] }
 lazy_static = "1.4"
-tokio = { version = "1.37", features = ["full"] }
+tokio = { version = "1.38", features = ["full"] }
 tokio-serde = { version = "0.9", features = ["json"] }
 opener = "0.7"
 rodio = "0.18"
 copypasta = { version = "0.10", features = ["smithay-clipboard"] }
 
 serde_repr = "0.1"
-fastrand = "2.0"
+fastrand = "2.1"
 dirs = "5.0"
 itertools = "0.13"
 anyhow = "1.0"
