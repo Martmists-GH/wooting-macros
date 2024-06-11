@@ -5,7 +5,6 @@ use crate::plugin::delay::DEFAULT_DELAY;
 use log::*;
 use rdev;
 use std::time;
-use tokio::sync::mpsc::error::TryRecvError;
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 
 #[derive(Debug)]
@@ -24,7 +23,7 @@ pub struct MacroTask {
 }
 
 impl MacroTask {
-    pub async fn new(
+    pub async fn start(
         mut receive_channel: UnboundedReceiver<MacroTaskEvent>,
         // Only sequence probably needed here
         // TODO: Config will be a part of the Macro itself
@@ -33,10 +32,26 @@ impl MacroTask {
     ) {
         let mut is_running = false;
         let mut stop_after_running: Option<u32> = None;
+        let mut buffer = vec![];
+        let mut message_len = 0;
 
-        'task_loop: loop {
-            match receive_channel.try_recv() {
-                Ok(message) => match message {
+        loop {
+            // This ugly way of checking the channel is done only when there is a new message pending,
+            // otherwise we would block the thread
+            if !receive_channel.is_empty() {
+                message_len = receive_channel
+                    .recv_many(&mut buffer, receive_channel.len())
+                    .await;
+            }
+
+            // If the message isn't present, we skip this as well. Note we check the actual
+            // parsed message buffer.
+            if !buffer.is_empty() {
+                debug!(
+                    "value in channel: {:?}, received {message_len} messages",
+                    buffer
+                );
+                match buffer.last().unwrap() {
                     MacroTaskEvent::OneShot => {
                         error!("Executing oneshot macro");
                         is_running = true;
@@ -45,10 +60,10 @@ impl MacroTask {
                     MacroTaskEvent::RepeatX(amount) => {
                         error!("Executing repeat macro, {} times", amount);
                         is_running = true;
-                        stop_after_running = Some(amount);
+                        stop_after_running = Some(*amount);
                     }
                     MacroTaskEvent::RepeatStart => {
-                        if is_running == false {
+                        if !is_running {
                             error!("Executing starting a repeat macro");
                             is_running = true;
                             stop_after_running = None;
@@ -65,64 +80,45 @@ impl MacroTask {
                     }
                     MacroTaskEvent::Abort => {
                         error!("Executing aborting a macro");
-                        // TODO: look into aborting earlier in macro execution
                         is_running = false;
                     }
                     MacroTaskEvent::Kill => {
                         error!("EXECUTING KILLING OF THE TASK OF A MACRO");
-                        // break 'task_loop;
                         return;
                     }
-                },
-                Err(e) => match e {
-                    TryRecvError::Disconnected => {
-                        error!("RECEIVING CHANNEL DISCONNECTED");
-                        break 'task_loop;
-                    }
-
-                    TryRecvError::Empty => {
-                        // If the channel is empty, we don't want to do anything explicit here.
-                        tokio::time::sleep(time::Duration::from_millis(DEFAULT_DELAY)).await;
-                    }
-                },
+                }
             }
 
+            // We reset the buffer here, discarding any unused messages as only the neweest
+            // message is important.
+            buffer = vec![];
+
+            // If a macro should run then run it
             if is_running {
-                // if let TriggerEventType::KeyPressEvent { ref data, .. } = macro_data.trigger {
-                //     //TODO: this is very experimental and not final
-                //
-                // if MacroType::OnHold != macro_data.macro_type
-                //     || MacroType::Toggle != macro_data.macro_type
-                // {
-                //     {
-                //         plugin::util::lift_trigger_key(*data.first().unwrap(), &send_channel)
-                //             .unwrap();
-                //     };
-                // }
-                // }
+                // Run each action in the macro sequence
                 for action in macro_data.sequence.iter() {
                     action.execute(&send_channel).await.unwrap();
                 }
 
+                // Decrement the counter for how many times it should run (for repeat only)
                 if let Some(amount) = stop_after_running {
-                    error!("Macro will run {} times", amount);
+                    error!("Macro will run {} times", amount - 1);
                     if amount - 1 == 0 {
+                        // Stop running the macro if it's finished
                         is_running = false;
                         stop_after_running = None;
                     } else {
                         stop_after_running = Some(amount - 1);
                     }
                 }
-                match macro_data.macro_type {
-                    MacroType::Single => {
-                        is_running = false;
-                    }
-                    _ => (),
+                // If it's a single macro, always stop running, else don't care.
+                if macro_data.macro_type == MacroType::Single {
+                    is_running = false;
                 }
             } else {
+                // Small pause to not spam the CPU as this is polling based.
                 tokio::time::sleep(time::Duration::from_millis(DEFAULT_DELAY)).await;
             }
         }
-        // TODO: Consider maybe doing some cleanup here
     }
 }
