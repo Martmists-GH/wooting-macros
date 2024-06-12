@@ -14,7 +14,8 @@ pub struct MacroConfig {
     pub trigger: TriggerEventType,
     pub enabled: bool,
     pub repeat_amount: u32,
-    pub record_delay_sequence: Option<bool>
+    pub record_delay_sequence: Option<bool>,
+    pub relaxed_key_trigger: bool,
 }
 
 //TODO: put the MacroConfig inside the Macro

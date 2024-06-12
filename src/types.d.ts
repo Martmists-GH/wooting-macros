@@ -40,6 +40,8 @@ export type MacroState = {
   updateMacroType: (newType: MacroType) => void
   updateMacroRepeatAmount: (newAmount: number) => void
   updateMacroRecordSeqDelay: (newValue: number) => void
+  updateMacroRelaxedTrigger: (newValue: boolean) => void
+  getMacroRelaxedTrigger: (macro: Macro) => boolean
   getMacroRecordSeqDelayIndex: (macro: Macro) => number
   updateTrigger: (newElement: TriggerEventType) => void
   updateAllowWhileOtherKeys: (value: boolean) => void
@@ -72,10 +74,10 @@ export type SettingsState = {
 // Input Event Types
 export type TriggerEventType =
   | {
-      type: 'KeyPressEvent'
-      data: number[]
-      allow_while_other_keys: boolean
-    }
+    type: 'KeyPressEvent'
+    data: number[]
+    allow_while_other_keys: boolean
+  }
   | { type: 'MouseEvent'; data: MouseButton }
 
 export type KeyPressEventAction = {
@@ -121,6 +123,7 @@ export interface Macro {
   sequence: ActionEventType[]
   repeat_amount: number
   record_delay_sequence: undefined | boolean
+  relaxed_key_trigger: boolean
 }
 
 export interface Collection {

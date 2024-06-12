@@ -43,7 +43,8 @@ const macroDefault: Macro = {
   trigger: { type: 'KeyPressEvent', data: [], allow_while_other_keys: false },
   sequence: [],
   repeat_amount: 1,
-  record_delay_sequence: undefined
+  record_delay_sequence: undefined,
+  relaxed_key_trigger: false
 }
 
 function MacroProvider({ children }: MacroProviderProps) {
@@ -183,6 +184,17 @@ function MacroProvider({ children }: MacroProviderProps) {
     },
     [macro, setMacro]
   )
+
+  const updateMacroRelaxedTrigger = useCallback(
+    (newValue: boolean) => {
+      setMacro({ ...macro, relaxed_key_trigger: newValue })
+    },
+    [macro, setMacro]
+  )
+
+  const getMacroRelaxedTrigger = useCallback((macro: Macro) => {
+    return macro.relaxed_key_trigger
+  }, [])
   const getMacroRecordSeqDelayIndex = useCallback((macro: Macro) => {
     let value: number = 0
     switch (macro.record_delay_sequence) {
@@ -396,6 +408,8 @@ function MacroProvider({ children }: MacroProviderProps) {
       updateMacroType,
       updateMacroRepeatAmount,
       updateMacroRecordSeqDelay,
+      updateMacroRelaxedTrigger,
+      getMacroRelaxedTrigger,
       getMacroRecordSeqDelayIndex,
       updateTrigger,
       updateAllowWhileOtherKeys,
@@ -421,6 +435,8 @@ function MacroProvider({ children }: MacroProviderProps) {
       canSaveMacro,
       updateMacroRecordSeqDelay,
       getMacroRecordSeqDelayIndex,
+      updateMacroRelaxedTrigger,
+      getMacroRelaxedTrigger,
       willCauseTriggerLooping,
       updateMacroName,
       updateMacroIcon,
