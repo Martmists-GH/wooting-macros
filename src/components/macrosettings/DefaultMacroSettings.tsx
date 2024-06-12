@@ -33,7 +33,7 @@ export default function DefaultMacroSettings() {
           <>
             <MacroDirectSetting
               title="Relaxed macro trigger"
-              description="Allow macro to activate with other keys pressed"
+              description="Allow macro to activate and deactivate while other keys than trigger are pressed"
               onChange={updateAllowWhileOtherKeys}
               isActive={getAllowOtherKeysTrigger}
             />

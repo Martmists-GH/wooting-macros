@@ -50,7 +50,7 @@ pub mod input {
                             return_value = true;
                         }
                         (trigger_combo, pressed, _pressed_previous, &false)
-                            if trigger_combo.iter().all(|x| pressed.contains(x)) =>
+                            if trigger_combo == *pressed =>
                         {
                             schan_macro_execute
                                 .send(MacroExecutorEvent::Start(macro_id.clone()))
@@ -69,7 +69,7 @@ pub mod input {
                             // We don't consume the value here.
                         }
                         (trigger_combo, _pressed, pressed_previous, &false)
-                            if trigger_combo.iter().all(|x| pressed_previous.contains(x)) =>
+                            if trigger_combo == *pressed_previous =>
                         {
                             schan_macro_execute
                                 .send(MacroExecutorEvent::Stop(macro_id.clone()))
