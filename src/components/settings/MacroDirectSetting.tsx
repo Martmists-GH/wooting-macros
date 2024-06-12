@@ -7,10 +7,7 @@ import {
   useRadioGroup,
   useColorModeValue
 } from '@chakra-ui/react'
-import {
-  MacroSettingDirectDefiniton,
-  MacroSettingOptionDefiniton
-} from '../../constants/enums'
+import { MacroSettingDirectDefiniton } from '../../constants/enums'
 
 interface RadioCardProps {
   value: string
@@ -23,7 +20,7 @@ interface RadioBoxButtonProps {
   title: string
   description: string
   onChange: (newValue: boolean) => void
-  isActive: number
+  isActive: boolean
 }
 
 export default function MacroDirectSetting({
@@ -32,7 +29,7 @@ export default function MacroDirectSetting({
   onChange,
   isActive
 }: RadioBoxButtonProps) {
-  const options = MacroSettingOptionDefiniton
+  const options = MacroSettingDirectDefiniton
 
   const { getRadioProps } = useRadioGroup({
     name: 'framework',
@@ -59,8 +56,8 @@ export default function MacroDirectSetting({
             return (
               <SetSetting
                 key={value}
-                value={MacroSettingOptionDefiniton[index]}
-                selectedValue={isActive}
+                value={MacroSettingDirectDefiniton[index]}
+                selectedValue={Number(isActive)}
                 onChange={onChange}
                 radio={radio}
               />
@@ -101,19 +98,9 @@ function SetSetting({ value, selectedValue, onChange, radio }: RadioCardProps) {
           transition="background-color 0.3s ease"
           _checked={{
             textColor: 'black',
-            bg:
-              selectedItem === 0
-                ? 'primary-accent.600'
-                : selectedItem === 1
-                  ? 'red.600'
-                  : 'teal.600',
+            bg: selectedItem === 0 ? 'red.600' : 'teal.600',
             color: 'white',
-            borderColor:
-              selectedItem === 0
-                ? 'primary-accent.600'
-                : selectedItem === 1
-                  ? 'red.600'
-                  : 'teal.600'
+            borderColor: selectedItem === 0 ? 'red.600' : 'teal.600'
           }}
           px={2}
           py={1}

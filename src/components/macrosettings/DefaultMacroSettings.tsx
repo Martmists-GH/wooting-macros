@@ -4,8 +4,15 @@ import MacroOverrideRadio from '../settings/MacroOverrideSetting'
 import MacroDirectSetting from '../settings/MacroDirectSetting'
 
 export default function DefaultMacroSettings() {
-  const { macro, updateMacroRecordSeqDelay, getMacroRecordSeqDelayIndex } =
-    useMacroContext()
+  const {
+    macro,
+    updateMacroRecordSeqDelay,
+    getMacroRecordSeqDelayIndex,
+    getAllowWhileOtherKeys,
+    updateAllowWhileOtherKeys
+  } = useMacroContext()
+
+  const getAllowOtherKeysTrigger = getAllowWhileOtherKeys(macro)
 
   return (
     <VStack w="full" spacing="4">
@@ -22,6 +29,17 @@ export default function DefaultMacroSettings() {
           data={getMacroRecordSeqDelayIndex(macro)}
         />
         <Divider />
+        {getAllowOtherKeysTrigger !== undefined && (
+          <>
+            <MacroDirectSetting
+              title="Relaxed macro trigger"
+              description="Allow macro to activate with other keys pressed"
+              onChange={updateAllowWhileOtherKeys}
+              isActive={getAllowOtherKeysTrigger}
+            />
+            <Divider />
+          </>
+        )}
       </VStack>
     </VStack>
   )

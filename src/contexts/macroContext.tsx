@@ -165,51 +165,9 @@ function MacroProvider({ children }: MacroProviderProps) {
     },
     [macro, setMacro]
   )
-  const updateMacroRecordSeqDelay = useCallback(
-    (newValue: number) => {
-      let value: undefined | boolean = undefined
+  const updateMacroRecordSeqDelay = useCallback
 
-      switch (newValue) {
-        case 2:
-          value = true
-          break
-        case 1:
-          value = false
-          break
-        default:
-          break
-      }
-
-      setMacro({ ...macro, record_delay_sequence: value })
-    },
-    [macro, setMacro]
-  )
-
-  const updateMacroRelaxedTrigger = useCallback(
-    (newValue: boolean) => {
-      setMacro({ ...macro, relaxed_key_trigger: newValue })
-    },
-    [macro, setMacro]
-  )
-
-  const getMacroRelaxedTrigger = useCallback((macro: Macro) => {
-    return macro.relaxed_key_trigger
-  }, [])
-  const getMacroRecordSeqDelayIndex = useCallback((macro: Macro) => {
-    let value: number = 0
-    switch (macro.record_delay_sequence) {
-      case true:
-        value = 2
-        break
-      case false:
-        value = 1
-        break
-      default:
-        break
-    }
-
-    return value
-  }, [])
+  const getMacroRecordSeqDelayIndex = useCallback
 
   const updateMacroIcon = useCallback(
     (newIcon: string) => {
@@ -249,6 +207,15 @@ function MacroProvider({ children }: MacroProviderProps) {
     },
     [macro, setMacro]
   )
+
+  const getAllowWhileOtherKeys = useCallback((macro: Macro) => {
+    const temp = { ...macro, trigger: macro.trigger }
+    if (temp.trigger.type === 'KeyPressEvent') {
+      return temp.trigger.allow_while_other_keys
+    } else {
+      return undefined
+    }
+  }, [])
 
   const onIdAdd = useCallback(
     (newId: number) => {
@@ -408,11 +375,10 @@ function MacroProvider({ children }: MacroProviderProps) {
       updateMacroType,
       updateMacroRepeatAmount,
       updateMacroRecordSeqDelay,
-      updateMacroRelaxedTrigger,
-      getMacroRelaxedTrigger,
       getMacroRecordSeqDelayIndex,
       updateTrigger,
       updateAllowWhileOtherKeys,
+      getAllowWhileOtherKeys,
       onElementAdd,
       onElementsAdd,
       updateElement,
@@ -435,8 +401,6 @@ function MacroProvider({ children }: MacroProviderProps) {
       canSaveMacro,
       updateMacroRecordSeqDelay,
       getMacroRecordSeqDelayIndex,
-      updateMacroRelaxedTrigger,
-      getMacroRelaxedTrigger,
       willCauseTriggerLooping,
       updateMacroName,
       updateMacroIcon,
@@ -444,6 +408,7 @@ function MacroProvider({ children }: MacroProviderProps) {
       updateMacroRepeatAmount,
       updateTrigger,
       updateAllowWhileOtherKeys,
+      getAllowWhileOtherKeys,
       onElementAdd,
       onElementsAdd,
       updateElement,
