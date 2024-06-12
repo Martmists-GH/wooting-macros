@@ -21,10 +21,18 @@ pub mod input {
         for (macro_id, macro_data) in triggers.blocking_read().id_map.iter() {
             // Get the macro trigger
             match &macro_data.config.trigger {
-                TriggerEventType::KeyPressEvent { data, .. } => {
-                    match (data, &current_pressed_keys, &previously_pressed_keys) {
+                TriggerEventType::KeyPressEvent {
+                    data,
+                    allow_while_other_keys,
+                } => {
+                    match (
+                        data,
+                        &current_pressed_keys,
+                        &previously_pressed_keys,
+                        allow_while_other_keys,
+                    ) {
                         // If the keys are the same, skip checking
-                        (_trigger_combo, pressed, pressed_previous)
+                        (_trigger_combo, pressed, pressed_previous, _)
                             if pressed == pressed_previous
                                 && macro_data.config.macro_type == MacroType::OnHold =>
                         {
@@ -32,7 +40,16 @@ pub mod input {
                             return_value = false;
                         }
                         // If the keys are different and its a trigger key pressed, start a macro
-                        (trigger_combo, pressed, _pressed_previous)
+                        (trigger_combo, pressed, _pressed_previous, &true)
+                            if trigger_combo.iter().any(|x| pressed.contains(x)) =>
+                        {
+                            schan_macro_execute
+                                .send(MacroExecutorEvent::Start(macro_id.clone()))
+                                .unwrap();
+                            // Consumption of the trigger key (when macro triggered)
+                            return_value = true;
+                        }
+                        (trigger_combo, pressed, _pressed_previous, &false)
                             if trigger_combo.iter().all(|x| pressed.contains(x)) =>
                         {
                             schan_macro_execute
@@ -42,7 +59,16 @@ pub mod input {
                             return_value = true;
                         }
                         // If the keys are different and its a trigger key released, stop a macro
-                        (trigger_combo, _pressed, pressed_previous)
+                        (trigger_combo, _pressed, pressed_previous, &true)
+                            if trigger_combo.iter().any(|x| pressed_previous.contains(x)) =>
+                        {
+                            schan_macro_execute
+                                .send(MacroExecutorEvent::Stop(macro_id.clone()))
+                                .unwrap();
+
+                            // We don't consume the value here.
+                        }
+                        (trigger_combo, _pressed, pressed_previous, &false)
                             if trigger_combo.iter().all(|x| pressed_previous.contains(x)) =>
                         {
                             schan_macro_execute
