@@ -14,12 +14,11 @@ use crate::config::{ApplicationConfig, ConfigFile};
 #[allow(unused_imports)]
 use crate::config::CONFIG_DIR;
 use crate::grabbing::executor::input::macro_executor;
-#[cfg(target_os = "linux")]
-use crate::grabbing::linux::input::input;
+
 #[cfg(target_os = "macos")]
 use crate::grabbing::macos::input::input;
-#[cfg(target_os = "windows")]
-use crate::grabbing::windows::input::input;
+#[cfg(any(target_os = "windows", target_os = "linux"))]
+use crate::grabbing::windows_linux::input::input;
 
 use crate::hid_table::*;
 use crate::macros::events::triggers::{MacroIndividualCommand, MacroTriggerEvent};
