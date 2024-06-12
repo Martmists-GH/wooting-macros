@@ -165,10 +165,40 @@ function MacroProvider({ children }: MacroProviderProps) {
     },
     [macro, setMacro]
   )
-  const updateMacroRecordSeqDelay = useCallback
+  const updateMacroRecordSeqDelay = useCallback(
+    (newValue: number) => {
+      let value: undefined | boolean = undefined
 
-  const getMacroRecordSeqDelayIndex = useCallback
+      switch (newValue) {
+        case 2:
+          value = true
+          break
+        case 1:
+          value = false
+          break
+        default:
+          break
+      }
 
+      setMacro({ ...macro, record_delay_sequence: value })
+    },
+    [macro, setMacro]
+  )
+  const getMacroRecordSeqDelayIndex = useCallback((macro: Macro) => {
+    let value: number = 0
+    switch (macro.record_delay_sequence) {
+      case true:
+        value = 2
+        break
+      case false:
+        value = 1
+        break
+      default:
+        break
+    }
+
+    return value
+  }, [])
   const updateMacroIcon = useCallback(
     (newIcon: string) => {
       setMacro({ ...macro, icon: newIcon })
