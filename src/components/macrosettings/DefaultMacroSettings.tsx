@@ -1,9 +1,11 @@
 import { Divider, Text, VStack } from '@chakra-ui/react'
 import { useMacroContext } from '../../contexts/macroContext'
-import RadioBoxButton from '../settings/MultipleSetting'
+import MacroOverrideRadio from '../settings/MacroOverrideSetting'
+import MacroDirectSetting from '../settings/MacroDirectSetting'
 
 export default function DefaultMacroSettings() {
-  const { updateMacroRecordSeqDelay } = useMacroContext()
+  const { macro, updateMacroRecordSeqDelay, getMacroRecordSeqDelayIndex } =
+    useMacroContext()
 
   return (
     <VStack w="full" spacing="4">
@@ -13,10 +15,11 @@ export default function DefaultMacroSettings() {
         </Text>
       </VStack>
       <VStack w="full" spacing={[4]}>
-        <RadioBoxButton
+        <MacroOverrideRadio
           title="Record sequence delay"
           description="Record delay when recording sequence"
           onChange={updateMacroRecordSeqDelay}
+          data={getMacroRecordSeqDelayIndex(macro)}
         />
         <Divider />
       </VStack>
