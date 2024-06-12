@@ -13,6 +13,7 @@ export enum MacroType {
 }
 
 export const MacroSettingOptionDefiniton: string[] = ['Ignore', 'Off', 'On']
+export const MacroSettingDirectDefiniton: string[] = ['Disabled', 'Enabled']
 
 export enum MacroSettingOption {
   IGNORED,
@@ -57,5 +58,5 @@ export enum HIDCategory {
 }
 
 /** To be Expanded */
-export enum PluginGroup {}
+export enum PluginGroup { }
 // e.g. PhillipsHue, or OBS

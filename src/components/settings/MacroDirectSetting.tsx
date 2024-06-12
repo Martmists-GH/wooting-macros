@@ -7,30 +7,32 @@ import {
   useRadioGroup,
   useColorModeValue
 } from '@chakra-ui/react'
-import { MacroSettingOptionDefiniton } from '../../constants/enums'
-import { useMacroContext } from '../../contexts/macroContext'
+import {
+  MacroSettingDirectDefiniton,
+  MacroSettingOptionDefiniton
+} from '../../constants/enums'
 
 interface RadioCardProps {
   value: string
   selectedValue: number
-  onChange: (value: number) => void
+  onChange: (value: boolean) => void
   radio: any
 }
 
 interface RadioBoxButtonProps {
   title: string
   description: string
-  onChange: (newValue: number) => void
+  onChange: (newValue: boolean) => void
+  isActive: number
 }
 
-export default function RadioBoxButton({
+export default function MacroDirectSetting({
   title,
   description,
-  onChange
+  onChange,
+  isActive
 }: RadioBoxButtonProps) {
   const options = MacroSettingOptionDefiniton
-  const { macro, updateMacroRecordSeqDelay, getMacroRecordSeqDelayIndex } =
-    useMacroContext()
 
   const { getRadioProps } = useRadioGroup({
     name: 'framework',
@@ -54,13 +56,12 @@ export default function RadioBoxButton({
         <HStack marginEnd={3}>
           {options.map((value, index) => {
             const radio = getRadioProps({ value })
-            const index_macro = getMacroRecordSeqDelayIndex(macro)
             return (
-              <MultipleSetting
+              <SetSetting
                 key={value}
                 value={MacroSettingOptionDefiniton[index]}
-                selectedValue={index_macro}
-                onChange={updateMacroRecordSeqDelay}
+                selectedValue={isActive}
+                onChange={onChange}
                 radio={radio}
               />
             )
@@ -71,22 +72,18 @@ export default function RadioBoxButton({
   )
 }
 
-function MultipleSetting({
-  value,
-  selectedValue,
-  onChange,
-  radio
-}: RadioCardProps) {
+function SetSetting({ value, selectedValue, onChange, radio }: RadioCardProps) {
   const { getInputProps, getRadioProps } = useRadio({
     ...radio,
-    isChecked: value === MacroSettingOptionDefiniton[selectedValue],
-    onChange: () => onChange(MacroSettingOptionDefiniton.indexOf(value))
+    isChecked: value === MacroSettingDirectDefiniton[selectedValue],
+    onChange: () =>
+      onChange(Boolean(MacroSettingDirectDefiniton.indexOf(value)))
   })
 
   const bg = useColorModeValue('primary-light.50', 'primary-dark.700')
   const input = getInputProps()
   const checkbox = getRadioProps()
-  const selectedItem = MacroSettingOptionDefiniton.indexOf(value)
+  const selectedItem = MacroSettingDirectDefiniton.indexOf(value)
 
   return (
     <HStack w="full" justifyContent="space-between" spacing={16}>
