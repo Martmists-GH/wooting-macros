@@ -1,6 +1,6 @@
 [package]
 name = "wooting-macro-backend"
-version = "1.1.0"
+version = "1.1.1"
 edition = "2021"
 description = "Macro software backend made by Wooting."
 authors = ["Jeroen N", "Erik S", "Simon W", "David M", "Khang N"]
@@ -21,11 +21,11 @@ rdev = { git = "https://github.com/medzernik/rdev", branch = "main", features = 
     "unstable_grab",
 ] }
 halfbrown = { version = "0.2", features = ["serde"] }
-lazy_static = "1.4"
+lazy_static = "1.5"
 tokio = { version = "1.38", features = ["full"] }
 tokio-serde = { version = "0.9", features = ["json"] }
 opener = "0.7"
-rodio = "0.18"
+rodio = "0.19"
 copypasta = { version = "0.10", features = ["smithay-clipboard"] }
 
 serde_repr = "0.1"
